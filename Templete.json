@@ -1,0 +1,20 @@
+[
+    {
+      "Location":"cmdb/views/controller/ambientController.py 159",
+      "DataType": "UserName",
+      "Purpose": "Usage",
+      "Note":""
+    },
+    {
+      "Location":"cmdb/views/controller/ambientController.py 159",
+      "DataType": "EmailAddredss",
+      "Purpose": "Usage",
+      "Note":""
+    },
+    {
+      "Location":"cmdb/views/controller/ambientController.py 159",
+      "DataType": "PhoneNumber",
+      "Purpose": "Usage",
+      "Note":""
+    }
+]

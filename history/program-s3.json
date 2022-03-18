@@ -1,0 +1,37 @@
+[
+  {
+    "Location": "D:\\study\\python\\cmdb-python-master\\test.py 14",
+    "DataType": "key",
+    "Purpose": "Store/CloudService/S3",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\study\\python\\cmdb-python-master\\test.py 19",
+    "DataType": "key",
+    "Purpose": "Store/CloudService/S3",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\study\\python\\cmdb-python-master\\test.py 25",
+    "DataType": "key",
+    "Purpose": "Store/CloudService/S3",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\study\\python\\cmdb-python-master\\test.py 30",
+    "DataType": "key",
+    "Purpose": "Store/CloudService/S3",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\study\\python\\cmdb-python-master\\test.py 38",
+    "DataType": "key",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  }
+]

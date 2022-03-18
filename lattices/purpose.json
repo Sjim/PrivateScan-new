@@ -1,0 +1,74 @@
+{
+  "ThirdParty": {
+    "path": "Share/ExternalShare/ThirdParty",
+    "abbr": ["ThirdParty"]
+  },
+  "ServiceProvider": {
+    "path": "Share/ExternalShare/ServiceProvider",
+    "abbr": ["ServiceProvider", "share", "send"]
+  },
+  "Consultant": {
+    "path": "Share/ExternalShare/Consultant",
+    "abbr": ["Consultant"]
+  },
+  "InternalShare": {
+    "path": "Share/InternalShare",
+    "abbr": ["InternalShare"]
+  },
+  "File": {
+    "path": "Store/Local/File",
+    "abbr": ["File", "SaveFile"]
+  },
+  "Directory": {
+    "path": "Store/Local/Directory",
+    "abbr": ["Directory", "Dir", "savedir", "savePath", "saveto"]
+  },
+  "Database": {
+    "path": "Store/Local/Database",
+    "abbr": ["save", "savedb", "Database", "sql"]
+  },
+  "Kafka": {
+    "path": "Store/MessagingSystem/Kafka",
+    "abbr": ["Kafka","send","produce"]
+  },
+  "NATS": {
+    "path": "Store/MessagingSystem/NATS",
+    "abbr": ["NATS","publish"]
+  },
+  "Azure": {
+    "path": "Store/CloudService/Azure",
+    "abbr": ["Azure"]
+  },
+  "S3": {
+    "path": "Store/CloudService/S3",
+    "abbr": ["S3"]
+  },
+  "ML": {
+    "path": "Usage/Analyze/ML",
+    "abbr": ["model", "predict", "train"]
+  },
+  "BI": {
+    "path": "Usage/Analyze/BI",
+    "abbr": ["Business"]
+  },
+  "Visualize": {
+    "path": "Usage/Visualize",
+    "abbr": ["Visualize","lmplot"]
+  },
+  "Archive": {
+    "path": "Usage/Archive",
+    "abbr": ["Archive", "delete"]
+  },
+  "Hash": {
+    "path": "Usage/Anonymize/Hash",
+    "abbr": ["Hash", "sha256"]
+  },
+  "Truncate": {
+    "path": "Usage/Anonymize/Truncate",
+    "abbr": ["Truncate"]
+  },
+  "Pseudonym": {
+    "path": "Usage/Anonymize/Pseudonym",
+    "abbr": ["Pseudonym", "alias"]
+  }
+}

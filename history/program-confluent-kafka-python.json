@@ -1,0 +1,191 @@
+[
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_consumer.py 109",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_producer.py 133",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_producer.py 137",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_producer.py 141",
+    "DataType": "UserName",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_producer.py 141",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\avro_producer.py 96",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\eos-transactions.py 149",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\eos-transactions.py 152",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\eos-transactions.py 64",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\eos-transactions.py 70",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_consumer.py 115",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_producer.py 143",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_producer.py 147",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_producer.py 151",
+    "DataType": "UserName",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_producer.py 151",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\json_producer.py 96",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\oauth_producer.py 108",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\oauth_producer.py 88",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_consumer.py 66",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_producer.py 66",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_producer.py 91",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_producer.py 94",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_producer.py 97",
+    "DataType": "UserName",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\protobuf_producer.py 97",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\sasl_producer.py 122",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\sasl_producer.py 51",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\confluent-kafka-python-master\\examples\\sasl_producer.py 95",
+    "DataType": "key",
+    "Purpose": "Store/MessagingSystem/Kafka",
+    "confidence": 1,
+    "Script": ""
+  }
+]

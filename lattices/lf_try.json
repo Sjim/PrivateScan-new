@@ -1,0 +1,3064 @@
+{
+  '__init__': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Store/Local/Directory'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 8
+  },
+  'token_id': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  '_login': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getCookies': {
+    'privacy': [
+      (
+      'Cookie',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getIp': {
+    'privacy': [
+      (
+      'IPAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getMacAddress': {
+    'privacy': [
+      (
+      'MacAddress',
+      'Usage'
+      ),
+      (
+      'IPAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'sendMail': {
+    'privacy': [
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      )
+    ],
+    'num': 2
+  },
+  'connect': {
+    'privacy': [
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  '_build_connect_config': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'kafka_consumer': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  '__str__': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'setFromUserInfo': {
+    'privacy': [
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'updInfoFromUserInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updPassWordFromUserInfo': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updJobTitleFromUserInfo': {
+    'privacy': [
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updSalaryFromUserInfo': {
+    'privacy': [
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updMaritalStatusFromUserInfo': {
+    'privacy': [
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updReligionFromUserInfo': {
+    'privacy': [
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updCountryFromUserInfo': {
+    'privacy': [
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updHouseNumberFromUserInfo': {
+    'privacy': [
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updBiometricDataFromUserInfo': {
+    'privacy': [
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getFromUserInfoByLogin': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'delFromSessionByKey': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromUserInfoByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'updPassWordFromUserInfoByUserId': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'PassWord',
+      'Store/MessagingSystem/NATS'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getNewSaltId': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'setSaltHostInfo': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'IPAddress',
+      'Store/Local/Database'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllHostInfoByPage': {
+    'privacy': [
+      (
+      'IPAddress',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 3
+  },
+  'addFromGitInfo': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'updAllFromGitInfoByGitId': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getAllFromReleaseOrderByOrderId': {
+    'privacy': [
+      (
+      'UserName',
+      'Store/Local/Directory'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'updAllFromUserInfoByUserId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'jobTitle',
+      'Usage'
+      ),
+      (
+      'Salary',
+      'Usage'
+      ),
+      (
+      'Religion',
+      'Usage'
+      ),
+      (
+      'MaritalStatus',
+      'Usage'
+      ),
+      (
+      'Country',
+      'Usage'
+      ),
+      (
+      'HouseNumber',
+      'Usage'
+      ),
+      (
+      'BiometricData',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromUsreInfoByUserId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getPassWordFromUserInfoByUserId': {
+    'privacy': [
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllUserInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getAllFromTaskListByTaskId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getAllFromTaskListByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'sendEmailFromTaskListByTaskId': {
+    'privacy': [
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      )
+    ],
+    'num': 1
+  },
+  'updFromNetworkByHostId': {
+    'privacy': [
+      (
+      'IPAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromNetworkByHostId': {
+    'privacy': [
+      (
+      'IPAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'createHost': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getAllHostID': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'key',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllItem': {
+    'privacy': [
+      (
+      'IPAddress',
+      'Usage'
+      ),
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getItem': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setAllFromTaskList': {
+    'privacy': [
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromTaskListByTaskId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updTaskStateFromTaskListByTaskId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Share/ExternalShare/ServiceProvider'
+      )
+    ],
+    'num': 1
+  },
+  'updAllHostInfoBySalt': {
+    'privacy': [
+      (
+      'key',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      ),
+      (
+      'IPAddress',
+      'Usage'
+      ),
+      (
+      'IPAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'salt_command': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getCheckFolderFromSaltBysaltIdList': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getCommandFromSaltBySaltIdList': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 2
+  },
+  'getSaltTest': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getSaltMem': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getSaltDisk': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getHostSsh': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getSaltGrains': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setNewHostInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getProjectListFromHostInfoBySalt': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'NATS_subscribe': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'NATS_publish': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'reconnect': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updGroupFromUserInfoByUserId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromUsreInfoByMyself': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updNameFromUserInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  '_send_connect_msg': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PassWord',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'checkUserSession': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromApiInfoByApiId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromApiInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromApiInfoByApiId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromApiInfoByApiId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getListFromApiInfoByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromApiInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setAllFromTaskLogListByTaskId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromTaskLogListByTaskId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromAmbientByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromAmbientById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromAmbientById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromAmbient': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromAmbientById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromAmbient': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getListFromRoleInfoByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getRoleIdAndRoleNameFromRoleInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromRoleInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getListFromRoleInfoAndApiInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'addApiListFromRoleIdByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delApiListFromRoleIdByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromRoleInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromRoleInfoAndApiInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromRoleInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromRoleInfoByRoleId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAuthorizerFromReleaseOrdeByOrderId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updStatusFromReleaseOrderByOrderId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromReleaseOrder': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getListFromReleaseOrderByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromReleaseOrderByOrderId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updContentFromReleaseOrdeByOrderId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllHostInfoByHostId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getHostInfoByHostId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updHostInfoByHostId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'addFromProjectSettingByProjectIdAndAmbientId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'editFromProjectSettingByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getContentFromProjectSettingByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromProjectSettingByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updFromProjectSettingByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromProjectSettingByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromProjectSettingByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromGitInfoByGitId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromGitInfoByGitId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getGitNameFromGitInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromGitInfoByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getBranchsFromGitByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromProjectInfoByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromProjectInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updFromProjectInfoByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromProjectInfoByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromProjectInfoByProjectId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getProjectNameFromProjectInfo': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromProjectNameFromGitId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromUserGroupByGroupId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromUserGroup': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromUserGroupByGroupId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getGroupIdAndGroupNameFromUserGroup': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromUserGroupByGroupId': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getListFromUserGroupByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'setFromVlan': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'delFromVlanById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromVlanByPage': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'updAllFromVlanById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getAllFromValnById': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  },
+  'getIdAndVlanNameFromVlan': {
+    'privacy': [
+      (
+      'UserName',
+      'Usage'
+      ),
+      (
+      'PhoneNumber',
+      'Usage'
+      ),
+      (
+      'EmailAddress',
+      'Usage'
+      )
+    ],
+    'num': 1
+  }
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_authentication.py 47",
+    "DataType": "key",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_authentication.py 51",
+    "DataType": "key",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_authentication.py 66",
+    "DataType": "UserName",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_authentication.py 66",
+    "DataType": "key",
+    "Purpose": "Usage",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_client.py 102",
+    "DataType": "UserName",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_client.py 94",
+    "DataType": "UserName",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 41",
+    "DataType": "UserName",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 44",
+    "DataType": "UserName",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 48",
+    "DataType": "UserName",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 58",
+    "DataType": "UserName",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 61",
+    "DataType": "UserName",
+    "Purpose": "Share/ExternalShare/ServiceProvider",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 67",
+    "DataType": "UserName",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_hello_world.py 75",
+    "DataType": "UserName",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  },
+  {
+    "Location": "D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples\\file_samples_service.py 78",
+    "DataType": "UserName",
+    "Purpose": "Store/Local/File",
+    "confidence": 1,
+    "Script": ""
+  }
+]
