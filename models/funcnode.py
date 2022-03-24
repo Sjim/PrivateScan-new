@@ -94,7 +94,10 @@ def get_script(node, script_list):
     words_list['vars'] = [item for item in words_list['vars'] if
                           item not in words_list['methods'] and item in words_in_line]
     # print(words_list)
+    words_list['methods'] = [item for item in words_list['methods'] if
+                             item in words_in_line]
     words_list['methods'] = list(set(words_list['methods']))
+    words_list['vars'] = list(set(words_list['vars']))
     # print(node.lineno, words_list)
     # words_list['methods'] = go_split(script_tmp, '()[]{},=+-*/#&@!^ ')
     # words_list['vars'] = go_split(script_tmp, '()[]{},=+-*/#&@!^ ')
@@ -119,6 +122,7 @@ def match_data_type(script, data_type):
             word_std_list = data_type[key]['abbr']
             if word_match(word_std_list, word):
                 private_word_list.append((key, word))
+    private_word_list = list(set(private_word_list))
     return private_word_list
 
 
@@ -133,24 +137,26 @@ def match_purpose_type(script, purpose_dict):
         purpose
 
     """
-    purpose = "Usage"
+    purpose = []
     for word in script:
         for key in purpose_dict.keys():
             purpose_list = purpose_dict[key]['abbr']
             if word_match(purpose_list, word):
-                purpose = purpose_dict[key]['path']
+                purpose.append(purpose_dict[key]['path'])
+    purpose = list(set(purpose))
+    if len(purpose) == 0:
+        purpose = ["Usage"]
     return purpose
 
 
 def get_all_words(node, line_no, vars_and_methods):
     if isinstance(node, ast.Call):
-        if node.lineno == line_no:
-            name = ""
-            if isinstance(node.func, ast.Name):
-                name = node.func.id
-            elif isinstance(node.func, ast.Attribute):
-                name = node.func.attr
-            vars_and_methods['methods'].append(name)
+        name = ""
+        if isinstance(node.func, ast.Name):
+            name = node.func.id
+        elif isinstance(node.func, ast.Attribute):
+            name = node.func.attr
+        vars_and_methods['methods'].append(name)
     # if hasattr(node, 'lineno') and node.lineno == line_no:
     for field, value in ast.iter_fields(node):
         if isinstance(value, list):
@@ -210,72 +216,78 @@ class FuncNode:
 
         script_ori, script = get_script(node, self.script_list)
         # print(script)
-        private_word_list = match_data_type(script['vars'], data_type)
-        purpose = "Usage"
 
+        private_word_list = match_data_type(script['vars'], data_type)
         for var in script['vars']:
             if var in self.key_variable:
                 private_word_list.extend(self.key_variable[var][0])
-        if len(private_word_list) > 0:
-            purpose = match_purpose_type(script['methods']+script['vars'], purpose_dict)
+        private_word_list = list(set(private_word_list))
+        if len(private_word_list) == 0:
+            private_word_list = [("Data", "data")]
+
+        purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
+        if not (("Data", "data") in private_word_list and purpose == ["Usage"]):
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,
                                                   script=script_ori)
+            # print(private_word_list, purpose)
             all_nodes.append(sentence_node)
+            # 考虑数据流，找到赋值语句，将被隐私数据污染的数据保存到private_word_list
+            # TODO
+            if isinstance(node, ast.Assign):
+                if len(private_word_list) > 0:
+                    for target in node.targets:
+                        if isinstance(target, ast.Name):
+                            self.key_variable[target.id] = (private_word_list, purpose)
+                        elif isinstance(target, ast.Attribute):
+                            self.key_variable[target.attr] = (private_word_list, purpose)
+                        else:
+                            pass
+                else:
+                    node_params = get_params(node.value)
+                    for node_param in node_params:
+                        if node_param in list(self.key_variable.keys()):
+                            private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
+                            sentence_node = SuspectedSentenceNode(self.file_path, line_no,
+                                                                  private_word_list_inherit,
+                                                                  purpose_inherit, script=script_ori)
+                            all_nodes.append(sentence_node)
+                            for target in node.targets:
+                                if isinstance(target, ast.Name):
+                                    self.key_variable[target.id] = (private_word_list_inherit, purpose_inherit)
+                                elif isinstance(target, ast.Attribute):
+                                    self.key_variable[target.attr] = (private_word_list_inherit, purpose_inherit)
+                                elif isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name):
+                                    self.key_variable[target.value.id] = (private_word_list_inherit, purpose_inherit)
+                                else:
+                                    pass
+
+            elif isinstance(node, ast.Expr):
+                # TODO 逻辑
+                node_params = get_params(node.value)
+                if len(node_params) > 0:
+                    for node_param in node_params:
+                        if node_param in list(self.key_variable.keys()) and len(private_word_list) == 0:
+                            private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
+                            sentence_node = SuspectedSentenceNode(self.file_path, line_no,
+                                                                  private_word_list_inherit,
+                                                                  purpose_inherit, script=script_ori)
+                            all_nodes.append(sentence_node)
 
         for private_word in private_word_list:
-            if private_word[0] not in [info[0] for info in self.private_info]:
-                self.private_info.append((private_word[0], purpose))
+            if not (private_word[0] == "Data" and purpose[0] == "Usage") and private_word[0] not in [info[0] for info in
+                                                                                                     self.private_info]:
+                for p in purpose:
+                    self.private_info.append((private_word[0], p))
 
         node_son_list = None
         for field, value in ast.iter_fields(node):
             if field == "body":
                 node_son_list = value
 
-        # 考虑数据流，找到赋值语句，将被隐私数据污染的数据保存到private_word_list
-        # TODO
-        if isinstance(node, ast.Assign):
-            if len(private_word_list) > 0:
-                for target in node.targets:
-                    if isinstance(target, ast.Name):
-                        self.key_variable[target.id] = (private_word_list, purpose)
-                    elif isinstance(target, ast.Attribute):
-                        self.key_variable[target.attr] = (private_word_list, purpose)
-                    else:
-                        pass
-            else:
-                node_params = get_params(node.value)
-                for node_param in node_params:
-                    if node_param in list(self.key_variable.keys()):
-                        private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
-                        sentence_node = SuspectedSentenceNode(self.file_path, line_no,
-                                                              private_word_list_inherit,
-                                                              purpose_inherit, script=script_ori)
-                        all_nodes.append(sentence_node)
-                        for target in node.targets:
-                            if isinstance(target, ast.Name):
-                                self.key_variable[target.id] = (private_word_list_inherit, purpose_inherit)
-                            elif isinstance(target, ast.Attribute):
-                                self.key_variable[target.attr] = (private_word_list_inherit, purpose_inherit)
-                            elif isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name):
-                                self.key_variable[target.value.id] = (private_word_list_inherit, purpose_inherit)
-                            else:
-                                pass
-
-        elif isinstance(node, ast.Expr):
-            # TODO 逻辑
-            node_params = get_params(node.value)
-            if len(node_params) > 0:
-                for node_param in node_params:
-                    if node_param in list(self.key_variable.keys()) and len(private_word_list) == 0:
-                        private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
-                        sentence_node = SuspectedSentenceNode(self.file_path, line_no,
-                                                              private_word_list_inherit,
-                                                              purpose_inherit, script=script_ori)
-                        all_nodes.append(sentence_node)
-
         if node_son_list is not None:
             for node_son in node_son_list:
                 all_nodes = self.get_sentence_nodes(node_son, all_nodes)
+
         return all_nodes
 
     def __str__(self):

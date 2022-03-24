@@ -19,7 +19,7 @@ def test_recall_accuracy(suspected_node_list, source):
 
         if node.private_info is None:
             node.private_info = [(key_word[0], node.purpose) for key_word in node.private_word_list]
-        print((node.file_path.replace(source + '\\', ''), node.line_no, node.private_info))
+        print((node.file_path.replace(source + '\\', ''), node.line_no, node.private_info,node.purpose))
         if (node.file_path.replace(source + '\\', '').replace("\\", '/'), node.line_no) in location_dict.keys():
             recall_location += 1
             # print(node)

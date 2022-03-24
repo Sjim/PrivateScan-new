@@ -5,6 +5,37 @@ from models.sentencenode import SuspectedSentenceNode
 from utils.funclink import ProjectAnalyzer
 
 
+def add_sentence_purpose(sentence_node_list, file_name, line_no, private_info_list_to_be_added):
+    """
+
+        Args:
+            sentence_node_list:
+            file_name: 所被添加purpose 的sentence_node 的 文件名
+            line_no: 所被添加purpose 的sentence_node 的 所在行
+            private_info_list_to_be_added: 用于添加 purpose 的（datatype,purpose)元素对
+        Returns:
+
+        """
+    for sentence_node in sentence_node_list:
+        if sentence_node.file_path == file_name and sentence_node.line_no == line_no:
+            private_info_without_usage = [info for info in sentence_node.private_info if info[1] != "Usage"]
+            for pair in private_info_list_to_be_added:
+                # private_info 添加
+                private_info_each = [(private[0], pair[1]) for private in sentence_node.private_info if
+                                     private[1] == "Usage"]
+                private_info_without_usage.extend(private_info_each)
+                # purpose 添加
+                if pair[1] != "Usage" and pair[1] not in sentence_node.purpose:
+                    sentence_node.purpose.append(pair[1])
+            # sentence_node.purpose = [purpose for purpose in
+            #                          sentence_node.purpose + [item[1] for item in private_info_list_to_be_added] if
+            #                          purpose != "Usage"]
+            if len(sentence_node.purpose) != 0:
+                sentence_node.purpose.remove("Usage")
+            sentence_node.private_info = private_info_without_usage
+            break
+
+
 def get_func_list(node, func_list=None):
     """
 
@@ -58,7 +89,7 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
     """
     if node_list is None:
         node_list = []
-    func_list = []
+    func_list = []  # node 中所有的方法
     if isinstance(node, ast.Expr) or isinstance(node, ast.Assign) or isinstance(node, ast.Return):
         func_list = get_func_list(node.value)
     elif isinstance(node, ast.For):
@@ -70,7 +101,7 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
             func_list = get_func_list(item, func_list)
 
     if len(func_list) > 0:
-        func_call = []
+        func_call = []  # 该Funcdefine node 调用的方法
         func_path = None
         if func_name is not None:
             func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py', func_name).replace(
@@ -79,23 +110,31 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
                 func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py',
                                                                                                 class_name + '.' + func_name).replace(
                     '/', '.')
+            func_path = source_dir.split("\\")[-1] + "." + func_path
             try:
+                # TODO 逻辑问题
                 func_call = p.find_direct_callee_func(func_path)
             except:
                 pass
 
         func_list = list(set(func_list))
-        # 隐私类型传递
+        # 隐私类型传递   func{data，usage} 中data 为空，则将func.usage赋予data,usage else extend
+        # c(): a.b   b中有隐私，赋给 c
         private_info = []
         for func in func_list:
             for func_c in func_call:
                 if func == func_c.split('.')[-1] and func_c in func_node_dict.keys():
-                    private_info.extend(func_node_dict[func_c])
+                    for pair in func_node_dict[func_c]:
+                        if pair[0] != "Data":
+                            private_info.append(pair)
+                    add_sentence_purpose(node_list_1st, file_name, node.lineno, func_node_dict[func_c])
+
         script = get_script(node, lines)
 
         if len(private_info) > 0:
             sentence_node = SuspectedSentenceNode(file_name, node.lineno, private_word_list=None, purpose=None,
                                                   private_info=private_info, script=script)
+            print(private_info)
             has = False
             for node_1st in node_list_1st:
                 if sentence_node == node_1st:

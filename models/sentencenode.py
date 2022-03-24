@@ -11,7 +11,7 @@ class SuspectedSentenceNode:
 
     def init_private_info(self):
         if self.private_info is None:
-            self.private_info = [(word[0], self.purpose) for word in self.private_word_list]
+            self.private_info = [(word[0], purpose) for word in self.private_word_list for purpose in self.purpose]
             self.private_info = list(set(self.private_info))
 
     def __str__(self):

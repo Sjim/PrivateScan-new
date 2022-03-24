@@ -32,6 +32,7 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
             all_nodes = func_node.get_sentence_nodes()
         except AttributeError:
             raise AttributeError(file_name, tree_node.lineno)
+
         node_list.extend(all_nodes)
         if len(func_node.private_info) > 0:
             if class_name is None:
@@ -42,6 +43,7 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
                 func_path = func_node.file_path.replace(source + '\\', '').replace("\\", '/').replace('.py',
                                                                                                       '/' + class_name + "/" + func_node.func_name).replace(
                     '/', '.')
+            func_path = source.split("\\")[-1] + "." + func_path
             func_dict[func_path] = func_node.private_info
     elif isinstance(tree_node, ast.ClassDef):
         class_name = tree_node.name

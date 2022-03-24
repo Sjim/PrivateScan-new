@@ -14,7 +14,7 @@ class ProjectAnalyzer:
         tmpfile = "./tmp.gv"
         file_list = walk_files_path(project)
         self._clazzs = find_all_class(file_list, project=project)
-        graghviz(tmpfile, file_list)
+        graghviz(tmpfile, file_list, project)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -45,9 +45,14 @@ class ProjectAnalyzer:
                         result[self._methods[i]].append(self._methods[j])
             return result
         else:
-            # 找出特定函数的直接callee
-            index = self._methods.index(target_func)
+            # 找出特定函数的直接callee 通过find
+            # index = -1
+            # for i in self._methods:
+            #     if i.endswith(target_func):
+            #         index = self._methods.index(i)
+            #         break
 
+            index = self._methods.index(target_func)
             if index < 0:
                 raise Exception("no such method")
             result = []
@@ -213,8 +218,8 @@ def test_algorithm():
     print(matrix)
 
 
-def graghviz(output, args: list):
-    res = pyan.create_callgraph(args, format="dot")
+def graghviz(output, args: list, root):
+    res = pyan.create_callgraph(args, format="dot", root=root)
     with open(output, 'w') as f:
         f.write(res)
 

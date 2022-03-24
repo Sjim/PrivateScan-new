@@ -86,6 +86,7 @@ if __name__ == '__main__':
     # print(word_match(["password", "pwd", "psw", "pswd"], "psw_a"))
     word_match(["ipaddr", "ipaddress", "ip"], "fileName")
     word_match(["key"], "gitkey")
+    print(word_match(["save", "savedb", "Database", "sql"],"saveInfo"))
     # word_match(["ipaddr", "IPAddress", "ip"], "output_dir")
     # word_match(["ipaddr", "IPAddress", "ip"], "os.path.pardir")
 

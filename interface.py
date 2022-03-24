@@ -32,7 +32,6 @@ def annotate(source, lattices, entire=False):
 
     # 递归获取所有方法可能的隐私数据和操作
     logging.warning("Start getting suspected data and operations in the first recursion...")
-    # TODO Add the situation that source is not a directory
     func_node_dict = get_link(func_dict, source)
     # print(func_node_dict)
     # for nodes in node_list:
@@ -78,4 +77,4 @@ if __name__ == '__main__':
     annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
-    # annotate("D:\\study\\python\\cmdb-python-master\\test.py", lattice, False)
+    # annotate("D:\\study\\python\\cmdb-python-master\\cmdb\\views\\test", lattice, False)
