@@ -5,7 +5,7 @@
   },
   "ServiceProvider": {
     "path": "Share/ExternalShare/ServiceProvider",
-    "abbr": ["ServiceProvider", "share", "send"]
+    "abbr": ["ServiceProvider", "share", "send", "upload"]
   },
   "Consultant": {
     "path": "Share/ExternalShare/Consultant",
@@ -21,7 +21,7 @@
   },
   "Directory": {
     "path": "Store/Local/Directory",
-    "abbr": ["Directory", "Dir", "savedir", "savePath", "saveto"]
+    "abbr": ["Directory", "savedir", "savePath", "saveto"]
   },
   "Database": {
     "path": "Store/Local/Database",
@@ -29,7 +29,7 @@
   },
   "Kafka": {
     "path": "Store/MessagingSystem/Kafka",
-    "abbr": ["Kafka","send","produce"]
+    "abbr": ["Kafka", "topic", "produce", "consume"]
   },
   "NATS": {
     "path": "Store/MessagingSystem/NATS",
@@ -41,11 +41,11 @@
   },
   "S3": {
     "path": "Store/CloudService/S3",
-    "abbr": ["S3"]
+    "abbr": ["S3", "boto", "boto3"]
   },
   "ML": {
     "path": "Usage/Analyze/ML",
-    "abbr": ["model", "predict", "train"]
+    "abbr": ["predict", "train"]
   },
   "BI": {
     "path": "Usage/Analyze/BI",
@@ -53,7 +53,7 @@
   },
   "Visualize": {
     "path": "Usage/Visualize",
-    "abbr": ["Visualize","lmplot"]
+    "abbr": ["Visualize","lmplot","seaborn","matplotlib", "plot", "cv2", "opencv", "pillow", "bokeh", "missingno", "leather", "show", "render"]
   },
   "Archive": {
     "path": "Usage/Archive",

@@ -33,14 +33,14 @@ def get_file_list(source, endpoint='.py'):
     """
     if isinstance(source, str):
         if os.path.isdir(source):
-            return walk_directory(source)
+            return source, walk_directory(source)
         elif source.endswith('.py'):
-            return [source]
+            return os.path.dirname(source), [source]
         elif source.endswith(('.zip', '.rar', '.7z')):
             file_zip = zipfile.ZipFile(source, 'r', zipfile.ZIP_DEFLATED)
             py_files = [py_file for py_file in file_zip.namelist() if py_file.endswith(endpoint)]
             file_zip.extractall(path=os.path.dirname(source), members=py_files)
-            return [os.path.dirname(source) + "/" + py_file for py_file in py_files]
+            return source.replace('.zip', '').replace('.rar', '').replace('.7z', ''), [os.path.dirname(source) + "/" + py_file for py_file in py_files]
 
     # TODO Add the situation that source is a url or a cache
     else:
@@ -48,4 +48,6 @@ def get_file_list(source, endpoint='.py'):
 
 
 if __name__ == '__main__':
-    get_file_list("/Users/liufan/program/PYTHON/SAP/restructure/Test/PrivacyScanTest.7z")
+    source, file_list = get_file_list("/Users/liufan/program/PYTHON/SAP/TestProject/22-photohash-master.zip")
+    print(source)
+    print(file_list)

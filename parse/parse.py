@@ -1,6 +1,8 @@
 import ast
 import re
-from models.funcnode import FuncNode
+from models.funcnode import FuncNode, get_script, match_data_type, \
+    match_purpose_type
+from models.sentencenode import SuspectedSentenceNode
 from utils import log
 
 logging = log.getlogger()
@@ -26,6 +28,8 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
         func_dict = {}
     if node_list is None:
         node_list = []
+    data_type = lattices["dataType"]
+    purpose_dict = lattices["purpose"]
     if isinstance(tree_node, ast.FunctionDef):
         func_node = FuncNode(tree_node, file_name, lattices, code_lines)
         try:
@@ -35,22 +39,42 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
 
         node_list.extend(all_nodes)
         if len(func_node.private_info) > 0:
+            source_replace = source.replace('\\', '/')
             if class_name is None:
-                func_path = func_node.file_path.replace(source + '\\', '').replace("\\", '/').replace('.py',
-                                                                                                      '/' + func_node.func_name).replace(
+                func_path = func_node.file_path.replace("\\", '/').replace(
+                    source_replace + '/', '').replace('.py',
+                                                      '/' + func_node.func_name).replace(
                     '/', '.')
             else:
-                func_path = func_node.file_path.replace(source + '\\', '').replace("\\", '/').replace('.py',
-                                                                                                      '/' + class_name + "/" + func_node.func_name).replace(
+                func_path = func_node.file_path.replace("\\", '/').replace(
+                    source_replace + '/', '').replace('.py',
+                                                      '/' + class_name + "/" + func_node.func_name).replace(
                     '/', '.')
-            func_path = source.split("\\")[-1] + "." + func_path
             func_dict[func_path] = func_node.private_info
+
     elif isinstance(tree_node, ast.ClassDef):
         class_name = tree_node.name
         for node_son in tree_node.body:
             if isinstance(node_son, ast.FunctionDef):
                 node_list, func_dict = parse_tree(source, lattices, file_name, node_son, code_lines, node_list,
                                                   func_dict, class_name)
+    elif not isinstance(tree_node, ast.Module):
+        line_no = tree_node.lineno
+        script_ori, script = get_script(tree_node, code_lines)
+
+        private_word_list = match_data_type(script['vars'], data_type)
+        private_word_list = list(set(private_word_list))
+        if len(private_word_list) == 0:
+            private_word_list = [("Data", "data")]
+
+        # print(script['methods'])
+        purpose = match_purpose_type(script['methods'], purpose_dict)
+        if not (("Data", "data") in private_word_list and purpose == ["Usage"]):
+            sentence_node = SuspectedSentenceNode(file_name, line_no,
+                                                  private_word_list, purpose,
+                                                  script=script_ori)
+            # print(private_word_list, purpose)
+            node_list.append(sentence_node)
     try:
         for node_son in tree_node.body:
             node_list, func_dict = parse_tree(source, lattices, file_name, node_son, code_lines,

@@ -30,8 +30,10 @@ def add_sentence_purpose(sentence_node_list, file_name, line_no, private_info_li
             # sentence_node.purpose = [purpose for purpose in
             #                          sentence_node.purpose + [item[1] for item in private_info_list_to_be_added] if
             #                          purpose != "Usage"]
-            if len(sentence_node.purpose) != 0:
+            if "Usage" in sentence_node.purpose:
                 sentence_node.purpose.remove("Usage")
+            # if len(sentence_node.purpose) != 0:
+            #     sentence_node.purpose.remove("Usage")
             sentence_node.private_info = private_info_without_usage
             break
 
@@ -104,13 +106,15 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
         func_call = []  # 该Funcdefine node 调用的方法
         func_path = None
         if func_name is not None:
-            func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py', func_name).replace(
+            func_path = file_name.replace("\\", '/').replace(source_dir + "/", '').replace('py', func_name).replace(
                 '/', '.')
             if class_name is not None:
-                func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py',
-                                                                                                class_name + '.' + func_name).replace(
+                func_path = file_name.replace("\\", '/').replace(
+                    source_dir + "/", '').replace('py',
+                                                  class_name + '.' + func_name).replace(
                     '/', '.')
-            func_path = source_dir.split("\\")[-1] + "." + func_path
+            # func_path = source_dir.split("\\")[-1] + "." + func_path
+            # print(func_path)
             try:
                 # TODO 逻辑问题
                 func_call = p.find_direct_callee_func(func_path)
@@ -134,7 +138,7 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
         if len(private_info) > 0:
             sentence_node = SuspectedSentenceNode(file_name, node.lineno, private_word_list=None, purpose=None,
                                                   private_info=private_info, script=script)
-            print(private_info)
+            # print(private_info)
             has = False
             for node_1st in node_list_1st:
                 if sentence_node == node_1st:

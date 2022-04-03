@@ -54,6 +54,13 @@ def get_params(node, node_params=None):
                 node_params.append(arg.id)
             else:
                 node_params = get_params(arg, node_params)
+        if isinstance(node.func, ast.Attribute):
+            node_value = node.func.value
+            while isinstance(node_value, ast.Attribute):
+                node_params.append(node_value.attr)
+                node_value = node_value.value
+            if isinstance(node_value, ast.Name):
+                node_params.append(node_value.id)
     elif isinstance(node, ast.List) or isinstance(node, ast.Tuple) or isinstance(node, ast.Set):
         for arg in node.elts:
             if isinstance(arg, ast.Name):
@@ -88,6 +95,7 @@ def get_script(node, script_list):
         script_tmp = "".join(script_ori).replace('\\\n', '').replace('\n', '')
     words_list = {'methods': [], 'vars': []}
     get_all_words(node, node.lineno, words_list)
+    # print("words_list:", words_list)
 
     words_in_line = go_split(script_tmp, '.()[]{},=+-*/#&@!^\'\" ')
 
@@ -141,6 +149,7 @@ def match_purpose_type(script, purpose_dict):
     for word in script:
         for key in purpose_dict.keys():
             purpose_list = purpose_dict[key]['abbr']
+            # print("purpose_list:", purpose_list, "word: ", word, word_match(purpose_list, word))
             if word_match(purpose_list, word):
                 purpose.append(purpose_dict[key]['path'])
     purpose = list(set(purpose))
@@ -151,12 +160,22 @@ def match_purpose_type(script, purpose_dict):
 
 def get_all_words(node, line_no, vars_and_methods):
     if isinstance(node, ast.Call):
-        name = ""
         if isinstance(node.func, ast.Name):
-            name = node.func.id
+            vars_and_methods['methods'].append(node.func.id)
         elif isinstance(node.func, ast.Attribute):
-            name = node.func.attr
-        vars_and_methods['methods'].append(name)
+            vars_and_methods['methods'].append(node.func.attr)
+            node_value = node.func.value
+            while isinstance(node_value, ast.Attribute):
+                vars_and_methods['methods'].append(node_value.attr)
+                node_value = node_value.value
+            if isinstance(node_value, ast.Name):
+                vars_and_methods['methods'].append(node_value.id)
+
+    elif isinstance(node, ast.Import):
+        for name in node.names:
+            vars_and_methods['methods'].append(name.name)
+            if name.asname:
+                vars_and_methods['methods'].append(name.asname)
     # if hasattr(node, 'lineno') and node.lineno == line_no:
     for field, value in ast.iter_fields(node):
         if isinstance(value, list):
@@ -215,7 +234,7 @@ class FuncNode:
         purpose_dict = self.lattices["purpose"]
 
         script_ori, script = get_script(node, self.script_list)
-        # print(script)
+        # print(line_no, " ", script)
 
         private_word_list = match_data_type(script['vars'], data_type)
         for var in script['vars']:
@@ -225,7 +244,8 @@ class FuncNode:
         if len(private_word_list) == 0:
             private_word_list = [("Data", "data")]
 
-        purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
+        # print(script['methods'])
+        purpose = match_purpose_type(script['methods'], purpose_dict)
         if not (("Data", "data") in private_word_list and purpose == ["Usage"]):
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,
                                                   script=script_ori)
@@ -279,14 +299,15 @@ class FuncNode:
                 for p in purpose:
                     self.private_info.append((private_word[0], p))
 
-        node_son_list = None
+        node_son_list = []
         for field, value in ast.iter_fields(node):
-            if field == "body":
-                node_son_list = value
+            if field == "body" or field == "orelse":
+                node_son_list.append(value)
 
-        if node_son_list is not None:
-            for node_son in node_son_list:
-                all_nodes = self.get_sentence_nodes(node_son, all_nodes)
+        if len(node_son_list) > 0:
+            for field in node_son_list:
+                for node_son in field:
+                    all_nodes = self.get_sentence_nodes(node_son, all_nodes)
 
         return all_nodes
 
