@@ -279,14 +279,15 @@ class FuncNode:
                 for p in purpose:
                     self.private_info.append((private_word[0], p))
 
-        node_son_list = None
+        node_son_list = []
         for field, value in ast.iter_fields(node):
-            if field == "body":
-                node_son_list = value
+            if field == "body" or field == "orelse":
+                node_son_list.append(value)
 
-        if node_son_list is not None:
-            for node_son in node_son_list:
-                all_nodes = self.get_sentence_nodes(node_son, all_nodes)
+        if len(node_son_list) > 0:
+            for field in node_son_list:
+                for node_son in field:
+                    all_nodes = self.get_sentence_nodes(node_son, all_nodes)
 
         return all_nodes
 

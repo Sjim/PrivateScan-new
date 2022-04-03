@@ -74,7 +74,7 @@ if __name__ == '__main__':
     data_type = load_json('lattices/datatype.json')
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
-    annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
+    # annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
-    # annotate("D:\\study\\python\\cmdb-python-master\\cmdb\\views\\test", lattice, False)
+    annotate("D:\\study\\python\\cmdb-python-master\\cmdb\\views\\test", lattice, False)
