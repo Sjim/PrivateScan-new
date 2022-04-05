@@ -63,9 +63,13 @@ def annotate(source, lattices, entire=False):
     stamp = [(node.file_path.replace("\\", "/").replace(source + "/", ''), node.line_no, node.private_info,
               node.private_word_list) for node in
              node_list_no_repeated]
+
+    for node in node_list_no_repeated:
+        print("node::: ", node)
+    # print("norepeat", node_list_no_repeated)
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
-    out_analyze(node_list, source)
+    out_analyze(node_list, source, "analyze/output/1-tmp.xls", entire)
 
     # todo
     if not entire:
@@ -108,8 +112,6 @@ if __name__ == '__main__':
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
 
-    # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
-
     # annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # annotate("D:\\study\\python\\test", lattice, False)
-    annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
+    annotate("/Users/liufan/program/PYTHON/SAP/TestProject/1-upload.py", lattice, False)

@@ -249,7 +249,7 @@ class FuncNode:
 
         # print(script['methods'])
         purpose = match_purpose_type(script['methods'], purpose_dict)
-        if not (("Data", "data") in private_word_list and purpose == ["Usage"]):
+        if not (("None", "none") in private_word_list and purpose == ["None"]):
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,self.func_name,
                                                   script=script_ori, methods_called=script['methods'])
             # print(private_word_list, purpose)
@@ -321,7 +321,7 @@ class FuncNode:
 
 
 if __name__ == '__main__':
-    file = open("D:\\study\\python\\cmdb-python-master\\test.py", encoding='utf-8')
+    file = open("D:\\study\\python\\cmdb-python-master\\main.py", encoding='utf-8')
     lines = file.readlines()
     string = ""
     for line in lines:

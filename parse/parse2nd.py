@@ -107,14 +107,16 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
         func_call = []  # 该Func define node 调用的方法
         func_path = None
         if func_name is not None:
-            func_path = file_name.replace("\\", '/').replace(source_dir.replace("\\", "/") + "/", '').replace('py',
-                                                                                                              func_name).replace(
+            func_path = file_name.replace("\\", '/').replace(
+                source_dir.replace("\\", "/") + "/", '').replace('py',
+                                                                 func_name).replace(
                 '/', '.')
             if class_name is not None:
                 func_path = file_name.replace("\\", '/').replace(
-                    source_dir.replace("\\", "/") + "/", '').replace('py',
-                                                                     class_name + '.' + func_name).replace(
+                    source_dir.replace("\\", '/') + "/", '').replace('py',
+                                                  class_name + '.' + func_name).replace(
                     '/', '.')
+            # print(func_path)
             # func_path = source_dir.split("\\")[-1] + "." + func_path
             # print(func_path)
             try:
