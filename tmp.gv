@@ -3,19 +3,154 @@ digraph G {
     subgraph cluster_G {
 
         graph [style="filled,rounded", fillcolor="#80808018", label=""];
-        test [label="test", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
-        test__test [label="test.test", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
-        subgraph cluster_test__test {
+        partOne [label="partOne", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        partOne__project [label="partOne.project", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
+        partOne__project__file2AST [label="partOne.project.file2AST", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
+        partOne__utils [label="partOne.utils", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
+        partOne__utils__accuracyCheck [label="partOne.utils.accuracyCheck", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="4"];
+        partOne__utils__filePreProcess [label="partOne.utils.filePreProcess", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="5"];
+        partOne__utils__javascript [label="partOne.utils.javascript", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="6"];
+        partOne__utils__linesCounter [label="partOne.utils.linesCounter", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="7"];
+        partOne__utils__pyCallGraph [label="partOne.utils.pyCallGraph", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="8"];
+        subgraph cluster_partOne__project__file2AST {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="test.test"];
-            test__test__Shutil [label="Shutil", style="filled", fillcolor="#99ff99b2", fontcolor="#000000", group="1"];
-            subgraph cluster_test__test__Shutil {
+            graph [style="filled,rounded", fillcolor="#80808018", label="partOne.project.file2AST"];
+            partOne__project__file2AST__AST [label="AST", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__Param [label="Param", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__add_init_vars [label="add_init_vars", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__add_init_vars_for_all [label="add_init_vars_for_all", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__annotate [label="annotate", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__get_func_AST_by_name [label="get_func_AST_by_name", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__get_method_Ast [label="get_method_Ast", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__get_taint_var_indexes [label="get_taint_var_indexes", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__get_vars [label="get_vars", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__in_dictionary [label="in_dictionary", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            partOne__project__file2AST__type_path [label="type_path", style="filled", fillcolor="#e0ff65b2", fontcolor="#000000", group="2"];
+            subgraph cluster_partOne__project__file2AST__AST {
 
-                graph [style="filled,rounded", fillcolor="#80808018", label="test.test.Shutil"];
-                test__test__Shutil__move [label="move", style="filled", fillcolor="#65ff65b2", fontcolor="#000000", group="1"];
+                graph [style="filled,rounded", fillcolor="#80808018", label="partOne.project.file2AST.AST"];
+                partOne__project__file2AST__AST____init__ [label="__init__", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__check_param [label="check_param", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__contain_vars [label="contain_vars", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__contains_words [label="contains_words", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__get_all_methods [label="get_all_methods", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__get_tainted_var_line_num [label="get_tainted_var_line_num", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__get_tainted_vars [label="get_tainted_vars", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__init_taint_vars [label="init_taint_vars", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__AST__is_contain_taint [label="is_contain_taint", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+            }
+            subgraph cluster_partOne__project__file2AST__Param {
+
+                graph [style="filled,rounded", fillcolor="#80808018", label="partOne.project.file2AST.Param"];
+                partOne__project__file2AST__Param____init__ [label="__init__", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
+                partOne__project__file2AST__Param__is_empty [label="is_empty", style="filled", fillcolor="#d6ff32b2", fontcolor="#000000", group="2"];
             }
         }
+        subgraph cluster_partOne__utils__accuracyCheck {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="partOne.utils.accuracyCheck"];
+            partOne__utils__accuracyCheck__get_accuracy [label="get_accuracy", style="filled", fillcolor="#65ffa3b2", fontcolor="#000000", group="4"];
+            partOne__utils__accuracyCheck__get_comparison_lists [label="get_comparison_lists", style="filled", fillcolor="#65ffa3b2", fontcolor="#000000", group="4"];
+        }
+        subgraph cluster_partOne__utils__filePreProcess {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="partOne.utils.filePreProcess"];
+            partOne__utils__filePreProcess__get_all_files [label="get_all_files", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+            partOne__utils__filePreProcess__get_all_variable [label="get_all_variable", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+            partOne__utils__filePreProcess__get_func_name [label="get_func_name", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+            partOne__utils__filePreProcess__preprocess_data_type_lattice [label="preprocess_data_type_lattice", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+            partOne__utils__filePreProcess__read_execl [label="read_execl", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+            partOne__utils__filePreProcess__read_json [label="read_json", style="filled", fillcolor="#65feffb2", fontcolor="#000000", group="5"];
+        }
+        subgraph cluster_partOne__utils__linesCounter {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="partOne.utils.linesCounter"];
+            partOne__utils__linesCounter__count [label="count", style="filled", fillcolor="#8465ffb2", fontcolor="#000000", group="7"];
+        }
+        subgraph cluster_partOne__utils__pyCallGraph {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="partOne.utils.pyCallGraph"];
+            partOne__utils__pyCallGraph__dot_to_pdf [label="dot_to_pdf", style="filled", fillcolor="#e065ffb2", fontcolor="#000000", group="8"];
+            partOne__utils__pyCallGraph__get_call_graphX [label="get_call_graph", style="filled", fillcolor="#e065ffb2", fontcolor="#000000", group="8"];
+        }
     }
-        test__test -> test__test__Shutil [style="dashed",  color="#838b8b"];
-        test__test__Shutil -> test__test__Shutil__move [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__get_method_Ast [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__get_vars [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__type_path [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__add_init_vars [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__AST [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__Param [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__get_func_AST_by_name [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__add_init_vars_for_all [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__get_taint_var_indexes [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__annotate [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__project__file2AST__in_dictionary [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__get_tainted_vars [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__contains_words [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__init_taint_vars [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__get_all_methods [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__get_tainted_var_line_num [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__contain_vars [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__check_param [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST__is_contain_taint [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__AST -> partOne__project__file2AST__AST____init__ [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__Param -> partOne__project__file2AST__Param____init__ [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST__Param -> partOne__project__file2AST__Param__is_empty [style="dashed",  color="#838b8b"];
+        partOne__utils__accuracyCheck -> partOne__utils__accuracyCheck__get_accuracy [style="dashed",  color="#838b8b"];
+        partOne__utils__accuracyCheck -> partOne__utils__accuracyCheck__get_comparison_lists [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__get_all_variable [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__read_json [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__get_func_name [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__preprocess_data_type_lattice [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__read_execl [style="dashed",  color="#838b8b"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__get_all_files [style="dashed",  color="#838b8b"];
+        partOne__utils__linesCounter -> partOne__utils__linesCounter__count [style="dashed",  color="#838b8b"];
+        partOne__utils__pyCallGraph -> partOne__utils__pyCallGraph__get_call_graphX [style="dashed",  color="#838b8b"];
+        partOne__utils__pyCallGraph -> partOne__utils__pyCallGraph__dot_to_pdf [style="dashed",  color="#838b8b"];
+        partOne__project__file2AST -> partOne__utils__accuracyCheck__get_comparison_lists [style="solid",  color="#000000"];
+        partOne__project__file2AST -> partOne__utils__accuracyCheck__get_accuracy [style="solid",  color="#000000"];
+        partOne__project__file2AST -> partOne__utils__filePreProcess__read_execl [style="solid",  color="#000000"];
+        partOne__project__file2AST -> partOne__project__file2AST__annotate [style="solid",  color="#000000"];
+        partOne__project__file2AST__type_path -> partOne__project__file2AST__type_path [style="solid",  color="#000000"];
+        partOne__project__file2AST__get_vars -> partOne__project__file2AST__get_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST____init__ -> partOne__project__file2AST__AST__check_param [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__check_param -> partOne__project__file2AST__AST__is_contain_taint [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__init_taint_vars -> partOne__project__file2AST__AST__init_taint_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__init_taint_vars -> partOne__project__file2AST__AST__contains_words [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__init_taint_vars -> partOne__project__file2AST__AST__is_contain_taint [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__contains_words -> partOne__project__file2AST__AST__contains_words [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__contains_words -> partOne__project__file2AST__AST__is_contain_taint [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__contain_vars -> partOne__project__file2AST__AST____init__ [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__contain_vars -> partOne__project__file2AST__AST__contain_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_vars -> partOne__project__file2AST__get_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_vars -> partOne__project__file2AST__AST__get_tainted_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_vars -> partOne__project__file2AST__AST__contain_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_var_line_num -> partOne__project__file2AST__AST____init__ [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_var_line_num -> partOne__project__file2AST__in_dictionary [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_tainted_var_line_num -> partOne__project__file2AST__AST__get_tainted_var_line_num [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_all_methods -> partOne__project__file2AST__AST__get_all_methods [style="solid",  color="#000000"];
+        partOne__project__file2AST__AST__get_all_methods -> partOne__project__file2AST__AST____init__ [style="solid",  color="#000000"];
+        partOne__project__file2AST__add_init_vars_for_all -> partOne__project__file2AST__get_method_Ast [style="solid",  color="#000000"];
+        partOne__project__file2AST__add_init_vars_for_all -> partOne__project__file2AST__add_init_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__add_init_vars_for_all -> partOne__project__file2AST__get_func_AST_by_name [style="solid",  color="#000000"];
+        partOne__project__file2AST__add_init_vars_for_all -> partOne__project__file2AST__get_taint_var_indexes [style="solid",  color="#000000"];
+        partOne__project__file2AST__get_method_Ast -> partOne__project__file2AST__get_method_Ast [style="solid",  color="#000000"];
+        partOne__project__file2AST__get_taint_var_indexes -> partOne__project__file2AST__Param [style="solid",  color="#000000"];
+        partOne__project__file2AST__get_taint_var_indexes -> partOne__project__file2AST__Param____init__ [style="solid",  color="#000000"];
+        partOne__project__file2AST__get_taint_var_indexes -> partOne__project__file2AST__in_dictionary [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__utils__filePreProcess__read_json [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST__init_taint_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST__get_all_methods [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST____init__ [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST__get_tainted_vars [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__utils__filePreProcess__get_all_files [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__AST__get_tainted_var_line_num [style="solid",  color="#000000"];
+        partOne__project__file2AST__annotate -> partOne__project__file2AST__type_path [style="solid",  color="#000000"];
+        partOne__utils__filePreProcess -> partOne__utils__filePreProcess__read_execl [style="solid",  color="#000000"];
+        partOne__utils__filePreProcess__get_func_name -> partOne__utils__filePreProcess__get_func_name [style="solid",  color="#000000"];
+        partOne__utils__filePreProcess__get_all_files -> partOne__utils__filePreProcess__get_all_files [style="solid",  color="#000000"];
+        partOne__utils__filePreProcess__get_all_variable -> partOne__utils__filePreProcess__get_func_name [style="solid",  color="#000000"];
+        partOne__utils__linesCounter -> partOne__utils__linesCounter__count [style="solid",  color="#000000"];
+        partOne__utils__linesCounter__count -> partOne__utils__filePreProcess__get_all_files [style="solid",  color="#000000"];
     }

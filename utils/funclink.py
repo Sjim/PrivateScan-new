@@ -219,7 +219,7 @@ def test_algorithm():
 
 
 def graghviz(output, args: list, root):
-    res = pyan.create_callgraph(args, format="dot", root=root)
+    res = pyan.create_callgraph(args, format="dot")
     with open(output, 'w') as f:
         f.write(res)
 
@@ -242,7 +242,6 @@ def get_link(func_node_dict, source_dir):
     pa = ProjectAnalyzer(source_dir)
     for method in func_node_dict.keys():
         if method in pa.get_methods():
-            # print(pa.find_all_call_func(method))
             for method_link in (pa.find_all_call_func(method)):
                 if method_link[0] in func_node_dict.keys():
                     func_node_dict_all[method_link[0]].extend(func_node_dict_all[method])

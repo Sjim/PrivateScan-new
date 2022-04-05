@@ -18,20 +18,22 @@ def add_sentence_purpose(sentence_node_list, file_name, line_no, private_info_li
         """
     for sentence_node in sentence_node_list:
         if sentence_node.file_path == file_name and sentence_node.line_no == line_no:
-            private_info_without_usage = [info for info in sentence_node.private_info if info[1] != "Usage"]
+            private_info_without_usage = [info for info in sentence_node.private_info if info[1] != "None"]
             for pair in private_info_list_to_be_added:
                 # private_info 添加
                 private_info_each = [(private[0], pair[1]) for private in sentence_node.private_info if
-                                     private[1] == "Usage"]
+                                     private[1] == "None"]
                 private_info_without_usage.extend(private_info_each)
                 # purpose 添加
-                if pair[1] != "Usage" and pair[1] not in sentence_node.purpose:
+                if pair[1] != "None" and pair[1] not in sentence_node.purpose:
                     sentence_node.purpose.append(pair[1])
             # sentence_node.purpose = [purpose for purpose in
             #                          sentence_node.purpose + [item[1] for item in private_info_list_to_be_added] if
             #                          purpose != "Usage"]
-            if len(sentence_node.purpose) != 0:
-                sentence_node.purpose.remove("Usage")
+            if "None" in sentence_node.purpose:
+                sentence_node.purpose.remove("None")
+            # if len(sentence_node.purpose) != 0:
+            #     sentence_node.purpose.remove("Usage")
             sentence_node.private_info = private_info_without_usage
             break
 
@@ -68,7 +70,8 @@ def get_func_list(node, func_list=None):
     return func_list
 
 
-def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, file_name, node_list=None, func_name=None,
+def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, file_name, call_flow, node_list=None,
+                  func_name=None,
                   class_name=None):
     """
 
@@ -101,18 +104,20 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
             func_list = get_func_list(item, func_list)
 
     if len(func_list) > 0:
-        func_call = []  # 该Funcdefine node 调用的方法
+        func_call = []  # 该Func define node 调用的方法
         func_path = None
         if func_name is not None:
-            func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py', func_name).replace(
+            func_path = file_name.replace("\\", '/').replace(source_dir.replace("\\", "/") + "/", '').replace('py',
+                                                                                                              func_name).replace(
                 '/', '.')
             if class_name is not None:
-                func_path = file_name.replace(source_dir + "\\", '').replace("\\", '/').replace('py',
-                                                                                                class_name + '.' + func_name).replace(
+                func_path = file_name.replace("\\", '/').replace(
+                    source_dir.replace("\\", "/") + "/", '').replace('py',
+                                                                     class_name + '.' + func_name).replace(
                     '/', '.')
-            func_path = source_dir.split("\\")[-1] + "." + func_path
+            # func_path = source_dir.split("\\")[-1] + "." + func_path
+            # print(func_path)
             try:
-                # TODO 逻辑问题
                 func_call = p.find_direct_callee_func(func_path)
             except:
                 pass
@@ -123,18 +128,25 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
         private_info = []
         for func in func_list:
             for func_c in func_call:
-                if func == func_c.split('.')[-1] and func_c in func_node_dict.keys():
-                    for pair in func_node_dict[func_c]:
-                        if pair[0] != "Data":
-                            private_info.append(pair)
-                    add_sentence_purpose(node_list_1st, file_name, node.lineno, func_node_dict[func_c])
-
+                if func == func_c.split('.')[-1]:
+                    if func_c in func_node_dict.keys():
+                        for pair in func_node_dict[func_c]:
+                            if pair[0] != "None":
+                                private_info.append(pair)
+                        add_sentence_purpose(node_list_1st, file_name, node.lineno, func_node_dict[func_c])
+                    # 增加call_flow
+                    if func_c in p.get_methods():
+                        if file_name + "#" + str(node.lineno) in call_flow.keys():
+                            call_flow[file_name + "#" + str(node.lineno)].append(func_c)
+                        else:
+                            call_flow[file_name + "#" + str(node.lineno)] = [func_c]
         script = get_script(node, lines)
 
         if len(private_info) > 0:
             sentence_node = SuspectedSentenceNode(file_name, node.lineno, private_word_list=None, purpose=None,
+                                                  func_name=func_name,
                                                   private_info=private_info, script=script)
-            print(private_info)
+            # print(private_info)
             has = False
             for node_1st in node_list_1st:
                 if sentence_node == node_1st:
@@ -142,24 +154,33 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
                     break
             if not has:
                 node_list.append(sentence_node)
+
     if isinstance(node, ast.ClassDef):
         for node_son in node.body:
-            node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
-                                      file_name, node_list, func_name=node.name, class_name=node.name)
+            node_list, call_flow = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
+                                                 file_name, call_flow, node_list, func_name=node.name,
+                                                 class_name=node.name)
     elif isinstance(node, ast.FunctionDef):
         for node_son in node.body:
-            node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
-                                      file_name, node_list, func_name=node.name, class_name=class_name)
+            node_list, call_flow = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
+                                                 file_name, call_flow, node_list, func_name=node.name,
+                                                 class_name=class_name)
     else:
         try:
             for node_son in node.body:
-                node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
-                                          file_name, node_list, func_name=func_name,
-                                          class_name=class_name)
+                node_list, call_flow = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
+                                                     file_name, call_flow, node_list, func_name=func_name,
+                                                     class_name=class_name)
+            #
+            if isinstance(node, ast.If):
+                for node_son in node.orelse:
+                    node_list, call_flow = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
+                                                         file_name, call_flow, node_list, func_name=func_name,
+                                                         class_name=class_name)
         except AttributeError:
             pass
 
-    return node_list
+    return node_list, call_flow
 
 
 def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
@@ -176,10 +197,13 @@ def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
     """
     p = ProjectAnalyzer(source)
     node_list = []
+    call_flow_list = {}
     for file_name in file_list:
         with open(file_name, encoding='utf-8') as file_single:
             lines = file_single.readlines()
             tree_root = ast.parse(''.join(lines))
-            node_list_single = parse_tree2nd(source, p, tree_root, lines, func_node_dict, node_list1st, file_name)
+            node_list_single, call_flow_single = parse_tree2nd(source, p, tree_root, lines, func_node_dict,
+                                                               node_list1st, file_name, {})
             node_list.extend(node_list_single)
-    return node_list
+            call_flow_list.update(call_flow_single)
+    return node_list, call_flow_list

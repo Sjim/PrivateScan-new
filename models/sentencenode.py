@@ -1,13 +1,17 @@
 class SuspectedSentenceNode:
-    def __init__(self, file_path, line_no, private_word_list, purpose, private_info=None, script=None, confidence=1):
+    def __init__(self, file_path, line_no, private_word_list, purpose, func_name, private_info=None, script=None,
+                 confidence=1,
+                 methods_called=[]):
         self.file_path = file_path
         self.line_no = line_no
         self.script = script
         self.private_word_list = private_word_list
         self.purpose = purpose
+        self.func_name = func_name
         self.private_info = private_info
         self.confidence = confidence
         self.init_private_info()
+        self.methods_called = methods_called
 
     def init_private_info(self):
         if self.private_info is None:

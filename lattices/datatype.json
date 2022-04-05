@@ -49,7 +49,7 @@
   },
   "UserName": {
     "path": "PersonalData/Identify/UserName",
-    "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","shareName","accountname"]
+    "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","accountname"]
   },
   "BiometricData": {
     "path": "PersonalData/Identify/BiometricData",
@@ -57,7 +57,7 @@
   },
   "PassWord": {
     "path": "PersonalData/Identify/PassWord",
-    "abbr": ["pswd", "psw", "pwd", "password", "pass_word"]
+    "abbr": ["pswd", "psw", "pwd", "password", "pass_word", "gitpass"]
   },
   "key": {
     "path": "PersonalData/Identify/key",

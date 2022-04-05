@@ -1,6 +1,6 @@
 import copy
 import difflib
-import Levenshtein
+# import Levenshtein
 
 
 # duplicated
@@ -56,7 +56,7 @@ def word_match(word_std_list, word):
     """
     if "ip" in word_std_list:
         word_std_list.remove("ip")
-        if word == "ip":
+        if word == "ip" or word == 'IP' or word == 'Ip':
             return True
     for word_std in word_std_list:
         if character_match(word_std, word):
