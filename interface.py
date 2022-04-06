@@ -6,6 +6,7 @@ from accuracy.accuracytest import test_missed
 from analyze.outanalyze import out_analyze
 from parse.parse import parse_files
 from parse.parse2nd import parse_files_2nd
+from models.funcnode import match_data_type
 from utils.fileio import load_json, write_csv, write_to_excel
 from utils.funclink import get_link
 from utils.source import get_file_list
@@ -67,24 +68,34 @@ def annotate(source, lattices, entire=False):
     logging.warning("Output the result into file...")
     out_analyze(node_list, source)
 
-    # todo
+    # todo 处理annotation 的 返回值
     if not entire:
+
         return func_node_dict, call_flow
     else:
+        # 当entire 为true
+        purpose = get_program_purpose(source, lattices, file_list, func_node_dict)
+        for node in func_node_dict:
+            pass
         return func_node_dict
 
 
-def get_call_flow(func_node_list, node_list):
-    call_flow = {}
-    for sentence_node in node_list:
-        for method in sentence_node.methods_called:
-            for key in func_node_list.keys():
-                if key.endswith(method):
-                    if (sentence_node.file_path + "#" + str(sentence_node.line_no)) in call_flow.keys():
-                        call_flow[sentence_node.file_path + "#" + str(sentence_node.line_no)].append(key)
-                    else:
-                        call_flow[sentence_node.file_path + "#" + str(sentence_node.line_no)] = [key]
-    return call_flow
+def get_program_purpose(source, lattices, file_list, func_node_dict):
+    program_name = source.replace("\\", '/').split("/")[-1]
+    # 项目名称中有purpose 作为 项目的purpose
+    purpose = match_data_type(program_name, lattices['purpose'])
+    data_type = match_data_type(program_name, lattices['dataType'])
+    if purpose[0][0] != "None":
+        return purpose[0]
+    # 项目名称中有datatype 找datatype对应的purpose作为项目的purpose
+    elif data_type[0] != "None":
+        for private_info_pair in func_node_dict.values():
+            for pair in private_info_pair:
+                if pair[0] == data_type[0]:
+                    return data_type[1]
+    else:
+        pass
+    return None
 
 
 def test_projects(_path, _lattice):
@@ -110,6 +121,6 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
-    # annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
+    annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # annotate("D:\\study\\python\\test", lattice, False)
-    annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
+    # annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)

@@ -246,11 +246,12 @@ class FuncNode:
             if var in self.key_variable:
                 private_word_list.extend(self.key_variable[var][0])
         private_word_list = list(set(private_word_list))
-
+        if len(private_word_list) > 1 and ("None", "none") in private_word_list:
+            private_word_list.remove(("None", "none"))
         # print(script['methods'])
         purpose = match_purpose_type(script['methods'], purpose_dict)
-        if not (("Data", "data") in private_word_list and purpose == ["Usage"]):
-            sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,self.func_name,
+        if not (("None", "none") in private_word_list and purpose == ["None"]):
+            sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose, self.func_name,
                                                   script=script_ori, methods_called=script['methods'])
             # print(private_word_list, purpose)
             all_nodes.append(sentence_node)
@@ -272,7 +273,7 @@ class FuncNode:
                             private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
                             sentence_node = SuspectedSentenceNode(self.file_path, line_no,
                                                                   private_word_list_inherit,
-                                                                  purpose_inherit,self.func_name, script=script_ori,
+                                                                  purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
                             for target in node.targets:
@@ -294,13 +295,13 @@ class FuncNode:
                             private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
                             sentence_node = SuspectedSentenceNode(self.file_path, line_no,
                                                                   private_word_list_inherit,
-                                                                  purpose_inherit,self.func_name, script=script_ori,
+                                                                  purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
 
         for private_word in private_word_list:
             if not (private_word[0] == "None" and purpose[0] == "None") and private_word[0] not in [info[0] for info in
-                                                                                                     self.private_info]:
+                                                                                                    self.private_info]:
                 for p in purpose:
                     self.private_info.append((private_word[0], p))
 
