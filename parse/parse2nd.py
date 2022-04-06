@@ -22,7 +22,7 @@ def add_sentence_purpose(sentence_node_list, file_name, line_no, private_info_li
             for pair in private_info_list_to_be_added:
                 # private_info 添加
                 private_info_each = [(private[0], pair[1]) for private in sentence_node.private_info if
-                                     private[1] == "None"]
+                                     private[1] == "None" and pair[1] != "None"]
                 private_info_without_usage.extend(private_info_each)
                 # purpose 添加
                 if pair[1] != "None" and pair[1] not in sentence_node.purpose:
