@@ -67,7 +67,7 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
     #
     #     # print(script['methods'])
     #     purpose = match_purpose_type(script['methods'], purpose_dict)
-    #     if not (("None", "None") in private_word_list and purpose == ["None"]):
+    #     if not (("None", "none") in private_word_list and purpose == ["None"]):
     #         sentence_node = SuspectedSentenceNode(file_name, line_no,
     #                                               private_word_list, purpose, None,
     #                                               script=script_ori)
@@ -118,6 +118,12 @@ def parse_files(file_list, source, lattices):
 
 
 if __name__ == '__main__':
-    print(re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", "if __name__ == '__main__'"))
-    print(re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", "if __name__==\"__main__\""))
-    print("if __name__==\"__main__\"".replace(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()"))
+    # print(re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", "if __name__ == '__main__'"))
+    # print(re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", "if __name__==\"__main__\""))
+    # print("if __name__==\"__main__\"".replace(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()"))
+    with open("/Users/liufan/program/PYTHON/SAP/privacyScanLsn/test/main.py", encoding='utf-8') as file_single:
+        lines = file_single.read()
+        # print(lines)
+        # ast.parse(lines)
+        tree_root = ast.parse(lines)
+        print(lines)

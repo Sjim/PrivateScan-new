@@ -1,0 +1,21 @@
+digraph G {
+    graph [rankdir=LR, clusterrank="local"];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded", fillcolor="#80808018", label=""];
+        test__main [label="test.main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        subgraph cluster_test__main {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="test.main"];
+            test__main__a [label="a", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            test__main__b [label="b", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+            test__main__c [label="c", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+    }
+        test__main -> test__main__b [style="dashed",  color="#838b8b"];
+        test__main -> test__main__c [style="dashed",  color="#838b8b"];
+        test__main -> test__main__a [style="dashed",  color="#838b8b"];
+        test__main__a -> test__main__c [style="solid",  color="#000000"];
+        test__main__b -> test__main__b [style="solid",  color="#000000"];
+        test__main -> test__main__a [style="solid",  color="#000000"];
+    }

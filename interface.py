@@ -38,10 +38,6 @@ def annotate(source, lattices, entire=False):
     # 递归获取所有方法可能的隐私数据和操作
     logging.warning("Start getting suspected data and operations in the first recursion...")
     func_node_dict = get_link(func_dict, source)
-    # print("func_node_dict", func_node_dict)
-    # print(func_node_dict)
-    # for nodes in node_list:
-    #     print(nodes)
     # 第二遍递归
     logging.warning("Start second recursion...")
     node_list2nd, call_flow = parse_files_2nd(file_list, source, func_node_dict,
@@ -57,20 +53,21 @@ def annotate(source, lattices, entire=False):
             node_list_no_repeated.append(node)
         else:
             node_string.remove(node.__str__())
+
+    for node in node_list:
+        print(node)
     # 计算准确率
     logging.warning("Start calculate the accuracy...")
-    # ac = test_recall_accuracy(node_list_no_repeated, source)
 
     stamp = [(node.file_path.replace("\\", "/").replace(source + "/", ''), node.line_no, node.private_info,
               node.private_word_list) for node in
              node_list_no_repeated]
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
-    out_analyze(node_list, source)
+    out_analyze(node_list_no_repeated, source, "analyze/output/0-cmdb.xls", entire)
 
     # todo 处理annotation 的 返回值
     if not entire:
-
         return func_node_dict, call_flow
     else:
         # 当entire 为true
@@ -121,6 +118,6 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
-    annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
+    # annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # annotate("D:\\study\\python\\test", lattice, False)
-    # annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
+    annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)

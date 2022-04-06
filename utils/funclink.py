@@ -224,6 +224,7 @@ def graghviz(output, args: list, root):
         f.write(res)
 
 
+
 def walk_files_path(path, endpoint='.py'):
     file_list = []
     for root, dirs, files in os.walk(path):
@@ -253,10 +254,13 @@ def get_link(func_node_dict, source_dir):
 
 
 if __name__ == '__main__':
-    p = ProjectAnalyzer("/Users/liufan/program/PYTHON/SAP/cmdb-python-master")
-    print(p.get_methods())
+    # p = ProjectAnalyzer("/Users/liufan/program/PYTHON/SAP/cmdb-python-master")
+    # print(p.get_methods())
     # print(p.find_all_call_func("sdk_api.saltstack.SaltAPI.post_reques"))
-    print(p.find_direct_callee_func().keys())
+    # print(p.find_direct_callee_func().keys())
     # for key, value in p.find_direct_callee_func().items():
     #     print(key, value)
     # print(p.find_direct_callee_func())
+    res = pyan.create_callgraph("/Users/liufan/program/PYTHON/SAP/privacyScanLsn/test/main.py", format="dot")
+    graph = graphviz.Source(res)
+    graph.view()
