@@ -250,7 +250,7 @@ class FuncNode:
             private_word_list.remove(('None', 'none'))
 
         # print(script['methods'])
-        purpose = match_purpose_type(script['methods'], purpose_dict)
+        purpose = match_purpose_type(script['methods']+script['vars'], purpose_dict)
         if not (("None", "none") in private_word_list and purpose == ["None"]):
             # print(self.file_path, line_no, private_word_list, purpose)
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,self.func_name,

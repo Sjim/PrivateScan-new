@@ -64,20 +64,21 @@ def annotate(source, lattices, entire=False):
              node_list_no_repeated]
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
-    out_analyze(node_list_no_repeated, source, "analyze/output/0-cmdb.xls", entire)
 
     # todo 处理annotation 的 返回值
     if not entire:
+        out_analyze(node_list_no_repeated, source, "analyze/output/33-cmscontrib.xls", entire)
         return func_node_dict, call_flow
     else:
         # 当entire 为true
-        purpose = get_program_purpose(source, lattices, file_list, func_node_dict)
-        for node in func_node_dict:
-            pass
-        return func_node_dict
+        purpose = get_program_purpose(source, lattices, func_node_dict)
+        node_list_filtered = [item for item in node_list_no_repeated if
+                              purpose in item.purpose]
+        out_analyze(node_list_filtered, source, "analyze/output/2.xls", entire)
+        return node_list_filtered
 
 
-def get_program_purpose(source, lattices, file_list, func_node_dict):
+def get_program_purpose(source, lattices, func_node_dict):
     program_name = source.replace("\\", '/').split("/")[-1]
     # 项目名称中有purpose 作为 项目的purpose
     purpose = match_data_type(program_name, lattices['purpose'])
@@ -85,14 +86,33 @@ def get_program_purpose(source, lattices, file_list, func_node_dict):
     if purpose[0][0] != "None":
         return purpose[0]
     # 项目名称中有datatype 找datatype对应的purpose作为项目的purpose
-    elif data_type[0] != "None":
+    elif data_type[0] != ("None", "none"):
         for private_info_pair in func_node_dict.values():
             for pair in private_info_pair:
                 if pair[0] == data_type[0]:
                     return data_type[1]
     else:
-        pass
-    return None
+        for key, value in func_node_dict.items():
+            if key.endswith("main"):
+                main_purpose = [item[1] for item in value]
+                dict_num = {}
+                for item in main_purpose:
+                    if item not in dict_num.keys():
+                        dict_num[item] = main_purpose.count(item)
+                # print(dict_num)
+                most_counter = sorted(dict_num.items(), key=lambda x: x[1], reverse=True)[0][0]
+                return most_counter
+    empty = []
+    for l in func_node_dict.values():
+        empty.extend(l)
+    all_purpose = [item[1] for item in empty]
+    dict_num = {}
+    for item in all_purpose:
+        if item not in dict_num.keys():
+            dict_num[item] = all_purpose.count(item)
+    # print(dict_num)
+    most_counter = sorted(dict_num.items(), key=lambda x: x[1], reverse=True)[0][0]
+    return most_counter
 
 
 def test_projects(_path, _lattice):
@@ -120,4 +140,5 @@ if __name__ == '__main__':
 
     # annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # annotate("D:\\study\\python\\test", lattice, False)
-    annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
+    # annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
+    annotate("D:\\study\\python\\SAP检测项目\\cms\\cmscontrib", lattice, False)

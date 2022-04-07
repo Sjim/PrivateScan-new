@@ -29,7 +29,7 @@
   },
   "Kafka": {
     "path": "Store/MessagingSystem/Kafka",
-    "abbr": ["Kafka", "topic", "produce", "consume"]
+    "abbr": ["Kafka", "topic", "produce", "consume","Kafkaproducer"]
   },
   "NATS": {
     "path": "Store/MessagingSystem/NATS",

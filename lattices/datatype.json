@@ -49,7 +49,7 @@
   },
   "UserName": {
     "path": "PersonalData/Identify/UserName",
-    "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","accountname"]
+    "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","accountname","name"]
   },
   "BiometricData": {
     "path": "PersonalData/Identify/BiometricData",

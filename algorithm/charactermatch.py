@@ -69,9 +69,7 @@ def word_match(word_std_list, word):
 def test_match(a, b):
     print(b.find(a) != -1)
     print(difflib.SequenceMatcher((lambda x: x in ["_", "/"]), a, b).ratio())
-    print(Levenshtein.ratio(a, b))
-    print(Levenshtein.jaro(a, b))
-    print(Levenshtein.jaro_winkler(a, b))
+
     print()
 
 
@@ -84,9 +82,9 @@ if __name__ == '__main__':
     # print(word_match(["password", "pwd", "psw", "pswd"], "passpsw"))
     # print(word_match(["password", "pwd", "psw", "pswd"], "user_password_a"))
     # print(word_match(["password", "pwd", "psw", "pswd"], "psw_a"))
-    word_match(["ipaddr", "ipaddress", "ip"], "fileName")
+    word_match(["pswd", "psw", "pwd", "password", "pass_word", "gitpass"], "gen_password")
     word_match(["key"], "gitkey")
-    print(word_match(["save", "savedb", "Database", "sql"],"saveInfo"))
+    print(word_match(["Pseudonym", "alias"], "pseudonyms"))
     # word_match(["ipaddr", "IPAddress", "ip"], "output_dir")
     # word_match(["ipaddr", "IPAddress", "ip"], "os.path.pardir")
 

@@ -1,5 +1,6 @@
 import ast
 import copy
+import logging
 import os
 import re
 from _ast import AST
@@ -219,10 +220,13 @@ def test_algorithm():
 
 
 def graghviz(output, args: list, root):
-    res = pyan.create_callgraph(args, format="dot")
-    with open(output, 'w') as f:
-        f.write(res)
-
+    try:
+        res = pyan.create_callgraph(args, format="dot")
+        with open(output, 'w') as f:
+            f.write(res)
+    except ValueError as e:
+        logging.Logger(str(e))
+        pass
 
 
 def walk_files_path(path, endpoint='.py'):
@@ -244,11 +248,26 @@ def get_link(func_node_dict, source_dir):
     for method in func_node_dict.keys():
         if method in pa.get_methods():
             for method_link in (pa.find_all_call_func(method)):
-                if method_link[0] in func_node_dict.keys():
-                    func_node_dict_all[method_link[0]].extend(func_node_dict_all[method])
+                if func_node_dict_all[method][0][0] == "None" and method_link[0] in func_node_dict.keys():
+                    private_info_without_usage = [info for info in func_node_dict_all[method_link[0]] if
+                                                  info[1] != "None"]
+                    for pair in func_node_dict_all[method]:
+                        # private_info 添加
+                        private_info_each = [(private[0], pair[1]) for private in func_node_dict_all[method_link[0]]
+                                             if
+                                             private[1] == "None" and pair[1] != "None"]
+                        private_info_without_usage.extend(private_info_each)
+                    func_node_dict_all[method_link[0]] = private_info_without_usage
+
                 else:
-                    # print(method, method_link[0])
-                    func_node_dict_all[method_link[0]] = func_node_dict_all[method]
+                    for pair in func_node_dict_all[method]:
+                        if method_link[0] in func_node_dict.keys():
+                            func_node_dict_all[method_link[0]].append(pair)
+                        else:
+                            # print(method, method_link[0])
+                            func_node_dict_all[method_link[0]] = [pair]
+
+
 
     return func_node_dict_all
 
