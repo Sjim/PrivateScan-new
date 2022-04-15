@@ -111,7 +111,10 @@ def parse_files(file_list, source, lattices):
             logging.error("Constructing file to ast:" + file_name)
             lines = file_single.readlines()
             file_string = re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", ''.join(lines))
-            tree_root = ast.parse(file_string)
+            try:
+                tree_root = ast.parse(file_string)
+            except SyntaxError as e:
+                logging.error("Syntax error in "+file_name)
             node_list_single, func_dict = parse_tree(source, lattices, file_name, tree_root, lines, func_dict=func_dict)
             node_list.extend(node_list_single)
     return node_list, func_dict

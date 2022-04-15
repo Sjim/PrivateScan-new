@@ -104,7 +104,10 @@ def find_all_class(file_list: list, project="", endpoint=".py"):
     for f in file_list:
         with open(f, 'r', encoding='utf8') as file:
             lines = file.readlines()
-            tree = ast.parse(''.join(lines))
+            try:
+                tree = ast.parse(''.join(lines))
+            except SyntaxError as e:
+                logging.error("Syntax error in " + f)
             for node in tree.body:
                 part_result = find_class(node)
                 for i in range(len(part_result)):
@@ -225,8 +228,10 @@ def graghviz(output, args: list, root):
         with open(output, 'w') as f:
             f.write(res)
     except ValueError as e:
-        logging.Logger(str(e))
+        logging.error(str(e))
         pass
+    except SyntaxError as e:
+        logging.error("SyntaxError In Files")
 
 
 def walk_files_path(path, endpoint='.py'):
@@ -267,9 +272,18 @@ def get_link(func_node_dict, source_dir):
                             # print(method, method_link[0])
                             func_node_dict_all[method_link[0]] = [pair]
 
-
-
     return func_node_dict_all
+
+
+def get_call_flow(source_dir):
+    func_flow = {}
+    pa = ProjectAnalyzer(source_dir)
+    for method in pa.get_methods():
+        func_call = pa.find_direct_callee_func(method)
+        if func_call:
+            func_flow[method] = func_call
+    return func_flow
+
 
 
 if __name__ == '__main__':

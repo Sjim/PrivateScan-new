@@ -8,40 +8,12 @@ digraph G {
         subgraph cluster_main {
 
             graph [style="filled,rounded", fillcolor="#80808018", label="main"];
-            main__PIPEDREAM [label="PIPEDREAM", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
-            subgraph cluster_main__PIPEDREAM {
-
-                graph [style="filled,rounded", fillcolor="#80808018", label="main.PIPEDREAM"];
-                main__PIPEDREAM____init__ [label="__init__", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__create [label="create", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__findSuitableShare [label="findSuitableShare", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__isShareWritable [label="isShareWritable", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__openPipe [label="openPipe", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__run [label="run", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-                main__PIPEDREAM__uploadSoFile [label="uploadSoFile", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
-            }
-        }
-        subgraph cluster_test {
-
-            graph [style="filled,rounded", fillcolor="#80808018", label="test"];
-            test__a [label="a", style="filled", fillcolor="#ccfeccb2", fontcolor="#000000", group="1"];
+            main__record [label="record", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+            main__record_to_file [label="record_to_file", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
         }
     }
-        main -> main__PIPEDREAM [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__run [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__findSuitableShare [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__uploadSoFile [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__openPipe [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__create [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM____init__ [style="dashed",  color="#838b8b"];
-        main__PIPEDREAM -> main__PIPEDREAM__isShareWritable [style="dashed",  color="#838b8b"];
-        test -> test__a [style="dashed",  color="#838b8b"];
-        main -> main__PIPEDREAM [style="solid",  color="#000000"];
-        main -> main__PIPEDREAM____init__ [style="solid",  color="#000000"];
-        main -> main__PIPEDREAM__run [style="solid",  color="#000000"];
-        main__PIPEDREAM__findSuitableShare -> main__PIPEDREAM__isShareWritable [style="solid",  color="#000000"];
-        main__PIPEDREAM__openPipe -> main__PIPEDREAM__create [style="solid",  color="#000000"];
-        main__PIPEDREAM__run -> main__PIPEDREAM__findSuitableShare [style="solid",  color="#000000"];
-        main__PIPEDREAM__run -> main__PIPEDREAM__uploadSoFile [style="solid",  color="#000000"];
-        main__PIPEDREAM__run -> main__PIPEDREAM__openPipe [style="solid",  color="#000000"];
+        main -> main__record_to_file [style="dashed",  color="#838b8b"];
+        main -> main__record [style="dashed",  color="#838b8b"];
+        main -> main__record_to_file [style="solid",  color="#000000"];
+        main__record_to_file -> main__record [style="solid",  color="#000000"];
     }

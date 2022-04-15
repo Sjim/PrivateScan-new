@@ -8,3 +8,5 @@ def save_info():
     key = "123"
     private_info = {username, key}
     upload(private_info)
+
+save_info()
