@@ -104,10 +104,7 @@ def find_all_class(file_list: list, project="", endpoint=".py"):
     for f in file_list:
         with open(f, 'r', encoding='utf8') as file:
             lines = file.readlines()
-            try:
-                tree = ast.parse(''.join(lines))
-            except SyntaxError as e:
-                logging.error("Syntax error in " + f)
+            tree = ast.parse(''.join(lines))
             for node in tree.body:
                 part_result = find_class(node)
                 for i in range(len(part_result)):
@@ -231,7 +228,7 @@ def graghviz(output, args: list, root):
         logging.error(str(e))
         pass
     except SyntaxError as e:
-        logging.error("SyntaxError In Files")
+        raise e
 
 
 def walk_files_path(path, endpoint='.py'):

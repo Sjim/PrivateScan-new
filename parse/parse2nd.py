@@ -205,10 +205,7 @@ def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
     for file_name in file_list:
         with open(file_name, encoding='utf-8') as file_single:
             lines = file_single.readlines()
-            try:
-                tree_root = ast.parse(''.join(lines))
-            except SyntaxError:
-                logging.error("Syntax Error in "+file_name)
+            tree_root = ast.parse(''.join(lines))
             node_list_single = parse_tree2nd(source, p, tree_root, lines, func_node_dict,
                                              node_list1st, file_name, {})
             node_list.extend(node_list_single)

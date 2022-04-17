@@ -80,21 +80,24 @@ def annotate(source, lattices, entire=False):
 
     """
     # 获取文件列表（文件名）
-    logging.warning("Start getting file list...")
-    source, file_list = get_file_list(source)
-    logging.warning("Start getting all operations for private info and methods call graph...")
-    # 解析文件，获取隐私数据操作 和 函数调用图
-    node_list, func_dict = parse_files(file_list, source, lattices)
-    # print("func_dict", func_dict)
+    try:
+        logging.warning("Start getting file list...")
+        source, file_list = get_file_list(source)
+        logging.warning("Start getting all operations for private info and methods call graph...")
+        # 解析文件，获取隐私数据操作 和 函数调用图
+        node_list, func_dict = parse_files(file_list, source, lattices)
+        # print("func_dict", func_dict)
 
-    # 递归获取所有方法可能的隐私数据和操作
-    logging.warning("Start getting suspected data and operations in the first recursion...")
-    func_node_dict = get_link(func_dict, source)
-    # 第二遍递归
-    logging.warning("Start second recursion...")
-    node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
-                                   node_list)
+        # 递归获取所有方法可能的隐私数据和操作
+        logging.warning("Start getting suspected data and operations in the first recursion...")
+        func_node_dict = get_link(func_dict, source)
+        # 第二遍递归
+        logging.warning("Start second recursion...")
+        node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
+                                       node_list)
+    except SyntaxError as e:
 
+        return {"correctness": False, "result": {"fileName": e.filename, "lineNum": e.lineno}}
     # 将第二次递归对内容添加到列表
     node_list.extend(node_list2nd)
     # 去重wqq
@@ -116,8 +119,7 @@ def annotate(source, lattices, entire=False):
              node_list_no_repeated]
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
-
-    # todo 处理annotation 的 返回值
+    return_value = {"correctness": True, "result": {}}
     if not entire:
         out_analyze(node_list_no_repeated, source, "analyze/output/" + source.split("\\")[-1] + ".xls", entire)
         call_flow = get_call_flow(source)
@@ -127,7 +129,8 @@ def annotate(source, lattices, entire=False):
                 item = {"dataType": {"value": pair[0], "confidence": 1}, "purpose": {"value": pair[1], "confidence": 1}}
                 if item not in anno:
                     anno.append(item)
-        return anno, call_flow
+        return_value['result'].update(annotation=anno, call_flow=call_flow)
+
     else:
         # 当entire 为true
         purpose = get_program_purpose(source, lattices, func_node_dict)
@@ -138,9 +141,11 @@ def annotate(source, lattices, entire=False):
         data_type_list = []
         for item in node_list_filtered:
             for data_type_each in item.private_word_list:
-                if data_type_each != ("None", "none") and {"dataType": data_type_each[0], "confidence": 1} not in data_type_list:
+                if data_type_each != ("None", "none") and {"dataType": data_type_each[0],
+                                                           "confidence": 1} not in data_type_list:
                     data_type_list.append({"dataType": data_type_each[0], "confidence": 1})
-        return {"dataType": data_type_list, "purpose": purpose}
+        return_value['result'] = {"dataType": data_type_list, "purpose": purpose}
+    return return_value
 
 
 if __name__ == '__main__':
@@ -163,5 +168,3 @@ if __name__ == '__main__':
     # print('----------------call-flow-------------------')
     # for key, value in call_flow.items():
     #     print(key, value)
-
-
