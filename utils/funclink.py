@@ -134,31 +134,42 @@ def analyze_gv(gv, project="", endpoint=".py", class_exclude=None):
         # 遍历找到所有的函数依赖关系
         gv_file.seek(0, 0)
         for line in gv_file.readlines():
+            is_dependency = re.search(r'style="solid"', line)
+            # is_import_file = re.search(r'__')
+            if is_dependency is None:
+                # 函数定义，不是函数依赖
+                continue
             match_group = re.search(r'([a-zA-Z0-9_]+)\s*->\s*([a-zA-Z0-9_]+)', line)
             if match_group is not None:
-                # 去除文件
-                flag0 = os.path.isfile(project + os.sep + match_group.group(1).replace("__", os.sep) + endpoint)
-
+                origin = match_group.group(1).replace("__", ".")
+                target = match_group.group(2).replace("__", ".")
                 # 去除私有方法
                 flag1 = match_group.group(1).find("____") >= 0
                 flag2 = match_group.group(2).find("____") >= 0
 
                 # 去除类
-                flag3 = match_group.group(1).replace("__", ".") in clazzs or match_group.group(2).replace("__",
-                                                                                                          ".") in clazzs
-                flag4 = match_group.group(2).replace("__", ".") in clazzs or match_group.group(2).replace("__",
-                                                                                                          ".") in clazzs
+                flag3 = origin in clazzs
+                flag4 = target in clazzs
+                # 去除依赖文件
+                flag5 = os.path.isfile(project + "/" + match_group.group(1).replace("__", "/") + endpoint)
+                flag6 = os.path.isfile(project + "/" + match_group.group(2).replace("__", "/") + endpoint)
 
-                if not flag0 and not flag1 and not flag3 and match_group.group(1) not in methods:
-                    methods.append(match_group.group(1).replace("__", "."))
-                if not flag2 and not flag4 and match_group.group(2) not in methods:
-                    methods.append(match_group.group(2).replace("__", "."))
+                if not flag1 and not flag3:
+                    if flag5:
+                        origin += ".main"
+                    if origin not in methods:
+                        methods.append(origin)
+                if not flag2 and not flag4:
+                    if flag6:
+                        target += ".main"
+                    if target not in methods:
+                        methods.append(target)
 
-                if flag0 or flag1 or flag2 or flag3 or flag4:
+                if flag6 or flag1 or flag2 or flag3 or flag4:
                     continue
 
-                method_adjacency.append((methods.index(match_group.group(2).replace("__", ".")),
-                                         methods.index(match_group.group(1).replace("__", "."))))
+                method_adjacency.append((methods.index(target),
+                                         methods.index(origin)))
 
     method_num = len(methods)
     method_matrix = [[0] * method_num for _ in range(method_num)]
@@ -224,10 +235,8 @@ def graghviz(output, args: list, root):
         res = pyan.create_callgraph(args, format="dot")
         with open(output, 'w') as f:
             f.write(res)
-    except ValueError as e:
+    except Exception as e:
         logging.error(str(e))
-        pass
-    except SyntaxError as e:
         raise e
 
 
@@ -282,6 +291,15 @@ def get_call_flow(source_dir):
     return func_flow
 
 
+def test():
+    try:
+        file_list = walk_files_path("D:\\Download\\kafka-python-master-X")
+        res = pyan.create_callgraph(file_list, format="dot")
+    except Exception as e:
+        print(str(e))
+        raise e
+    return res
+
 
 if __name__ == '__main__':
     # p = ProjectAnalyzer("/Users/liufan/program/PYTHON/SAP/cmdb-python-master")
@@ -291,6 +309,7 @@ if __name__ == '__main__':
     # for key, value in p.find_direct_callee_func().items():
     #     print(key, value)
     # print(p.find_direct_callee_func())
-    res = pyan.create_callgraph("/Users/liufan/program/PYTHON/SAP/privacyScanLsn/test/main.py", format="dot")
-    graph = graphviz.Source(res)
-    graph.view()
+    try:
+        test()
+    except KeyError as e:
+        print(str(e))

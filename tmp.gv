@@ -3,17 +3,16 @@ digraph G {
     subgraph cluster_G {
 
         graph [style="filled,rounded", fillcolor="#80808018", label=""];
-        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
-        test [label="test", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
-        subgraph cluster_main {
+        h [label="h", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        h__h [label="h.h", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
+        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
+        test [label="test", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
+        subgraph cluster_test {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="main"];
-            main__record [label="record", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
-            main__record_to_file [label="record_to_file", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="test"];
+            test__a [label="a", style="filled", fillcolor="#cce0feb2", fontcolor="#000000", group="3"];
         }
     }
-        main -> main__record_to_file [style="dashed",  color="#838b8b"];
-        main -> main__record [style="dashed",  color="#838b8b"];
-        main -> main__record_to_file [style="solid",  color="#000000"];
-        main__record_to_file -> main__record [style="solid",  color="#000000"];
+        test -> test__a [style="dashed",  color="#838b8b"];
+        test -> test__a [style="solid",  color="#000000"];
     }

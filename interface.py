@@ -4,7 +4,7 @@ import time
 from accuracy.accuracytest import test_recall_accuracy, test_stamp
 from accuracy.accuracytest import test_missed
 from analyze.outanalyze import out_analyze
-from parse.parse import parse_files
+from parse.parse import parse_files,add_code_outside_func
 from parse.parse2nd import parse_files_2nd
 from models.funcnode import match_data_type
 from utils.fileio import load_json, write_csv, write_to_excel
@@ -87,7 +87,8 @@ def annotate(source, lattices, entire=False):
         # 解析文件，获取隐私数据操作 和 函数调用图
         node_list, func_dict = parse_files(file_list, source, lattices)
         # print("func_dict", func_dict)
-
+        if entire:
+            node_list = add_code_outside_func(file_list,source,lattices,node_list)
         # 递归获取所有方法可能的隐私数据和操作
         logging.warning("Start getting suspected data and operations in the first recursion...")
         func_node_dict = get_link(func_dict, source)
@@ -95,12 +96,15 @@ def annotate(source, lattices, entire=False):
         logging.warning("Start second recursion...")
         node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
                                        node_list)
-    except SyntaxError as e:
+    except Exception as e:
+        # 因为有各种报错 包括编译错误SyntaxError 包循环依赖导致的KeyError 以及可能出现的其他error 具体信息都在e中 就直接返回e 而不返回具体文件名和行数
 
-        return {"correctness": False, "result": {"fileName": e.filename, "lineNum": e.lineno}}
+        logging.error("Error happened in "+e.__traceback__.tb_frame.f_globals["__file__"]+str(e.__traceback__.tb_lineno))
+        return {"correctness": False, "result": e}
+
     # 将第二次递归对内容添加到列表
     node_list.extend(node_list2nd)
-    # 去重wqq
+    # 去重
     node_list_no_repeated = []
     node_string = [node.__str__() for node in node_list]
     for node in node_list:
@@ -113,22 +117,19 @@ def annotate(source, lattices, entire=False):
         print(node)
     # 计算准确率
     logging.warning("Start calculate the accuracy...")
-
-    stamp = [(node.file_path.replace("\\", "/").replace(source + "/", ''), node.line_no, node.private_info,
-              node.private_word_list) for node in
-             node_list_no_repeated]
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
     return_value = {"correctness": True, "result": {}}
     if not entire:
         out_analyze(node_list_no_repeated, source, "analyze/output/" + source.split("\\")[-1] + ".xls", entire)
         call_flow = get_call_flow(source)
-        anno = []
-        for value in func_node_dict.values():
+        anno = {}
+        for key, value in func_node_dict.items():
+            anno[key] = []
             for pair in value:
                 item = {"dataType": {"value": pair[0], "confidence": 1}, "purpose": {"value": pair[1], "confidence": 1}}
-                if item not in anno:
-                    anno.append(item)
+                if item not in anno[key]:
+                    anno[key].append(item)
         return_value['result'].update(annotation=anno, call_flow=call_flow)
 
     else:
@@ -156,12 +157,13 @@ if __name__ == '__main__':
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
     # annotate("D:\\study\\python\\cmdb-python-master", lattice, True)
-    annotate("D:\\study\\python\\test", lattice, False)
-    # annotate("D:\\study\\python\\PrivateInformationScanning", lattice, False)
-    # func_node_dict, call_flow = annotate("D:\\study\\python\\SAP检测项目\\nnja-python\\pyworkshop",
+    annotate("D:\\study\\python\\test", lattice, True)
+    # annotate("D:\\Download\\ghostpotato-master-X\\impacket\\examples\\secretsdump.py", lattice, False)
+    #
+    # func_node_dict, call_flow = annotate("D:\\study\\python\\SAP检测项目\\python-mini-projects-master",
     #                                      lattice, False)
-    # func_node_dict = annotate("D:\\study\\python\\SAP检测项目\\roytuts-python",
-    #                                      lattice, False)
+    # func_node_dict = annotate("D:\\study\\python\\SAP检测项目\\hana-my-thai-star-data-generator",
+    #                           lattice, False)
     # print('----------------annotation-------------------')
     # for key, value in func_node_dict.items():
     #     print(key, value)
