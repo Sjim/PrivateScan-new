@@ -3,6 +3,8 @@ import os
 import json
 
 # TODO 增加文件传输的方式（文件夹、文件、数据流）
+import re
+
 import xlrd
 import xlwt
 
@@ -156,3 +158,22 @@ def load_data_purpose_split(file_path):
             purpose_list.append((path, purpose))
 
     return data_type_list, purpose_list
+
+
+def verify_file_list(file_list):
+    for file in file_list:
+        with open(file, encoding='utf-8') as f:
+            content = f.read()
+            if re.search(r'=[ ]*lambda[^:]*:', content):
+                content_new = re.sub(r'=[ ]*lambda[^:]*:', '=', content)
+                file_new = file.replace('.py', '-backup.py')
+                with open(file_new, 'w', encoding='utf-8') as f_new:
+                    f_new.write(content_new)
+                file_list.remove(file)
+                file_list.append(file_new)
+    return file_list
+
+
+if __name__ == '__main__':
+    file_list = walk_files_path('/Users/liufan/program/PYTHON/SAP/TestProject')
+    verify_file_list(file_list)

@@ -79,19 +79,21 @@ def annotate(source, lattices, entire=False):
     Returns:
 
     """
-    # 获取文件列表（文件名）
+
     try:
+        # 获取文件列表（文件名）
         logging.warning("Start getting file list...")
         source, file_list = get_file_list(source)
+        # print(source, file_list)
         logging.warning("Start getting all operations for private info and methods call graph...")
         # 解析文件，获取隐私数据操作 和 函数调用图
         node_list, func_dict = parse_files(file_list, source, lattices)
         # print("func_dict", func_dict)
         if entire:
-            node_list = add_code_outside_func(file_list,source,lattices,node_list)
+            node_list = add_code_outside_func(file_list, source, lattices, node_list)
         # 递归获取所有方法可能的隐私数据和操作
         logging.warning("Start getting suspected data and operations in the first recursion...")
-        func_node_dict = get_link(func_dict, source)
+        func_node_dict = get_link(func_dict, source, file_list)
         # 第二遍递归
         logging.warning("Start second recursion...")
         node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
@@ -113,16 +115,15 @@ def annotate(source, lattices, entire=False):
         else:
             node_string.remove(node.__str__())
 
-    for node in node_list:
-        print(node)
     # 计算准确率
     logging.warning("Start calculate the accuracy...")
     # 隐私扫描结果输出到json文件
     logging.warning("Output the result into file...")
     return_value = {"correctness": True, "result": {}}
     if not entire:
-        out_analyze(node_list_no_repeated, source, "analyze/output/" + source.split("\\")[-1] + ".xls", entire)
-        call_flow = get_call_flow(source)
+        out_analyze(node_list_no_repeated, source,
+                    "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls", entire)
+        call_flow = get_call_flow(source, file_list)
         anno = {}
         for key, value in func_node_dict.items():
             anno[key] = []
@@ -138,7 +139,7 @@ def annotate(source, lattices, entire=False):
         node_list_filtered = [item for item in node_list_no_repeated if
                               item.purpose is not None and
                               purpose in item.purpose]
-        out_analyze(node_list_filtered, source, "analyze/output/" + source.split("\\")[-1] + ".xls", entire)
+        out_analyze(node_list_filtered, source, "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls", entire)
         data_type_list = []
         for item in node_list_filtered:
             for data_type_each in item.private_word_list:
@@ -154,10 +155,10 @@ if __name__ == '__main__':
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
 
-    # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
-
-    # annotate("D:\\study\\python\\cmdb-python-master", lattice, True)
-    annotate("D:\\study\\python\\test", lattice, True)
+    privates = annotate("/Users/liufan/program/PYTHON/SAP/TestProject", lattice, False)
+    # print(privates)
+    # for key, value in privates['result']['annotation'].items():
+    #     print(key, value)
     # annotate("D:\\Download\\ghostpotato-master-X\\impacket\\examples\\secretsdump.py", lattice, False)
     #
     # func_node_dict, call_flow = annotate("D:\\study\\python\\SAP检测项目\\python-mini-projects-master",

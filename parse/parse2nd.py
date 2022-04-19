@@ -199,7 +199,7 @@ def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
     Returns:
         -
     """
-    p = ProjectAnalyzer(source)
+    p = ProjectAnalyzer(source, file_list)
     node_list = []
 
     for file_name in file_list:
