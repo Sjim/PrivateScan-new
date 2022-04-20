@@ -45,7 +45,7 @@
   },
   "HouseNumber": {
     "path": "Tracking/Location/HouseNumber",
-    "abbr": ["home", "house", "HomeNumber"]
+    "abbr": ["homeNum", "houseNum", "HomeNumber"]
   },
   "UserName": {
     "path": "PersonalData/Identify/UserName",

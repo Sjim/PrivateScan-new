@@ -95,15 +95,18 @@ def get_script(node, script_list):
         script_tmp = "".join(script_ori).replace('\\\n', '').replace('\n', '')
     words_list = {'methods': [], 'vars': []}
     get_all_words(node, node.lineno, words_list)
+
     # print("words_list:", words_list)
 
     words_in_line = go_split(script_tmp, '.()[]{},=+-*/#&@!^\'\" ')
-
+    # TODO 修改words_in_line中的 注释内容
     words_list['vars'] = [item for item in words_list['vars'] if
-                          item not in words_list['methods'] and item in words_in_line]
+                          item not in words_list[
+                              'methods'] and item in words_in_line and "\"\"\"" not in item and "#" not in item]
     # print(words_list)
     words_list['methods'] = [item for item in words_list['methods'] if
-                             item in words_in_line]
+                             item in words_in_line and "\"\"\"" not in item and "#" not in item]
+
     words_list['methods'] = list(set(words_list['methods']))
     words_list['vars'] = list(set(words_list['vars']))
     # print(node.lineno, words_list)
@@ -178,6 +181,12 @@ def get_all_words(node, line_no, vars_and_methods):
             vars_and_methods['methods'].append(name.name)
             if name.asname:
                 vars_and_methods['methods'].append(name.asname)
+    elif isinstance(node,ast.ImportFrom):
+        for name in node.names:
+            vars_and_methods['methods'].append(name.name)
+            if name.asname:
+                vars_and_methods['methods'].append(name.asname)
+        vars_and_methods['methods'].extend(node.module.split("."))
     # if hasattr(node, 'lineno') and node.lineno == line_no:
     for field, value in ast.iter_fields(node):
         if isinstance(value, list):
@@ -250,10 +259,10 @@ class FuncNode:
             private_word_list.remove(('None', 'none'))
 
         # print(script['methods'])
-        purpose = match_purpose_type(script['methods']+script['vars'], purpose_dict)
+        purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
         if not (("None", "none") in private_word_list and purpose == ["None"]):
             # print(self.file_path, line_no, private_word_list, purpose)
-            sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose,self.func_name,
+            sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose, self.func_name,
                                                   script=script_ori, methods_called=script['methods'])
             # print(private_word_list, purpose)
             all_nodes.append(sentence_node)
@@ -275,7 +284,7 @@ class FuncNode:
                             private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
                             sentence_node = SuspectedSentenceNode(self.file_path, line_no,
                                                                   private_word_list_inherit,
-                                                                  purpose_inherit,self.func_name, script=script_ori,
+                                                                  purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
                             for target in node.targets:
@@ -297,7 +306,7 @@ class FuncNode:
                             private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
                             sentence_node = SuspectedSentenceNode(self.file_path, line_no,
                                                                   private_word_list_inherit,
-                                                                  purpose_inherit,self.func_name, script=script_ori,
+                                                                  purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
 

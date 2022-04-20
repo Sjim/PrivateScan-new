@@ -122,7 +122,20 @@ def parse_files(file_list, source, lattices):
     return node_list, func_dict
 
 
-def add_code(source, lattices, file_name, tree_node, code_lines, node_list):
+def add_code(lattices, file_name, tree_node, code_lines, node_list):
+    """
+
+    Args:
+        source: 目录
+        lattices: datatype purpose 格
+        file_name: 文件名
+        tree_node:
+        code_lines: 代码行列表
+        node_list: sentencenode list
+
+    Returns:
+
+    """
     data_type = lattices["dataType"]
     purpose_dict = lattices["purpose"]
     if not isinstance(tree_node, ast.FunctionDef) and not isinstance(tree_node, ast.ClassDef) and not isinstance(
@@ -145,31 +158,55 @@ def add_code(source, lattices, file_name, tree_node, code_lines, node_list):
 
     try:
         for node_son in tree_node.body:
-            add_code(source, lattices, file_name, node_son, code_lines,
+            add_code(lattices, file_name, node_son, code_lines,
                      node_list)
     except AttributeError:
         pass
 
 
 def has_node(node_list, file_name, line_no):
+    """
+
+    Args:
+        node_list: sentenceNodes list
+        file_name: 文件名
+        line_no: 行号
+
+    Returns:
+        node_list是否含有file_name line_no 的sentencenode
+    """
     for node in node_list:
         if node.file_path == file_name and node.line_no == line_no:
             return True
     return False
 
 
-def add_code_outside_func(file_list, source, lattices, node_list):
+def add_code_outside_func(file_list, lattices, node_list):
+    """
+
+        Args:
+            file_list: 文件名列表
+            lattices: 隐私类型
+            node_list: senetencenode 列表
+        Returns:
+            node_list:[<models.sentencenode.SuspectedSentenceNode object at 0x10e786eb0>,
+             <models.sentencenode.SuspectedSentenceNode object at 0x10e786f10>]
+             node_list为sentencenode对象列表，sentencenode对象可打印。
+
+             [sentencenode1, sentencenode2...]
+        """
     for file_name in file_list:
         with open(file_name, encoding='utf-8') as file_single:
             logging.error("Constructing file to ast:" + file_name)
             lines = file_single.readlines()
-            file_string = re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", ''.join(lines))
+            file_string = re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def __main__()", ''.join(lines))
+            # file_string = ''.join(lines)
             try:
                 tree_root = ast.parse(file_string)
             except SyntaxError as e:
                 e.filename = file_name
                 raise e
-            add_code(source, lattices, file_name, tree_root, lines, node_list)
+            add_code(lattices, file_name, tree_root, lines, node_list)
 
     return node_list
 

@@ -156,12 +156,12 @@ def analyze_gv(gv, project="", endpoint=".py", class_exclude=None):
 
                 if not flag1 and not flag3:
                     if flag5:
-                        origin += ".main"
+                        origin += ".__main__"
                     if origin not in methods:
                         methods.append(origin)
                 if not flag2 and not flag4:
                     if flag6:
-                        target += ".main"
+                        target += ".__main__"
                     if target not in methods:
                         methods.append(target)
 
@@ -293,7 +293,7 @@ def get_call_flow(source_dir):
 
 def test():
     try:
-        file_list = walk_files_path("D:\\Download\\kafka-python-master-X")
+        file_list = walk_files_path("D:\\study\\python\\test")
         res = pyan.create_callgraph(file_list, format="dot")
     except Exception as e:
         print(str(e))

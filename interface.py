@@ -4,7 +4,7 @@ import time
 from accuracy.accuracytest import test_recall_accuracy, test_stamp
 from accuracy.accuracytest import test_missed
 from analyze.outanalyze import out_analyze
-from parse.parse import parse_files,add_code_outside_func
+from parse.parse import parse_files, add_code_outside_func
 from parse.parse2nd import parse_files_2nd
 from models.funcnode import match_data_type
 from utils.fileio import load_json, write_csv, write_to_excel
@@ -15,7 +15,7 @@ from utils import log
 logging = log.getlogger()
 
 
-def get_program_purpose(source, lattices, func_node_dict):
+def get_program_purpose(source, lattices, func_node_dict, node_list):
     program_name = source.replace("\\", '/').split("/")[-1]
     # 项目名称中有purpose 作为 项目的purpose
     purpose = match_data_type(program_name, lattices['purpose'])
@@ -30,7 +30,7 @@ def get_program_purpose(source, lattices, func_node_dict):
                     return data_type[1]
     else:
         for key, value in func_node_dict.items():
-            if key.endswith("main"):
+            if key.endswith("main") or key.endswith("__main__"):
                 main_purpose = [item[1] for item in value]
                 dict_num = {}
                 for item in main_purpose:
@@ -40,15 +40,18 @@ def get_program_purpose(source, lattices, func_node_dict):
                 most_counter = sorted(dict_num.items(), key=lambda x: x[1], reverse=True)[0][0]
                 return most_counter
     empty = []
-    for l in func_node_dict.values():
-        empty.extend(l)
-    all_purpose = [item[1] for item in empty]
+    for l in node_list:
+        empty.extend(l.purpose)
+
     dict_num = {}
-    for item in all_purpose:
+    for item in empty:
         if item not in dict_num.keys():
-            dict_num[item] = all_purpose.count(item)
+            dict_num[item] = empty.count(item)
     # print(dict_num)
-    most_counter = sorted(dict_num.items(), key=lambda x: x[1], reverse=True)[0][0]
+    if node_list:
+        most_counter = sorted(dict_num.items(), key=lambda x: x[1], reverse=True)[0][0]
+    else:
+        most_counter = None
     return most_counter
 
 
@@ -87,8 +90,8 @@ def annotate(source, lattices, entire=False):
         # 解析文件，获取隐私数据操作 和 函数调用图
         node_list, func_dict = parse_files(file_list, source, lattices)
         # print("func_dict", func_dict)
-        if entire:
-            node_list = add_code_outside_func(file_list,source,lattices,node_list)
+        if entire or not entire:  # 当entire 为True时 要检测方法外代码行
+            node_list = add_code_outside_func(file_list, lattices, node_list)
         # 递归获取所有方法可能的隐私数据和操作
         logging.warning("Start getting suspected data and operations in the first recursion...")
         func_node_dict = get_link(func_dict, source)
@@ -99,7 +102,8 @@ def annotate(source, lattices, entire=False):
     except Exception as e:
         # 因为有各种报错 包括编译错误SyntaxError 包循环依赖导致的KeyError 以及可能出现的其他error 具体信息都在e中 就直接返回e 而不返回具体文件名和行数
 
-        logging.error("Error happened in "+e.__traceback__.tb_frame.f_globals["__file__"]+str(e.__traceback__.tb_lineno))
+        logging.error(
+            "Error happened in " + e.__traceback__.tb_frame.f_globals["__file__"] + str(e.__traceback__.tb_lineno))
         return {"correctness": False, "result": e}
 
     # 将第二次递归对内容添加到列表
@@ -134,7 +138,7 @@ def annotate(source, lattices, entire=False):
 
     else:
         # 当entire 为true
-        purpose = get_program_purpose(source, lattices, func_node_dict)
+        purpose = get_program_purpose(source, lattices, func_node_dict, node_list_no_repeated)
         node_list_filtered = [item for item in node_list_no_repeated if
                               item.purpose is not None and
                               purpose in item.purpose]
@@ -157,13 +161,16 @@ if __name__ == '__main__':
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
     # annotate("D:\\study\\python\\cmdb-python-master", lattice, True)
-    annotate("D:\\study\\python\\test", lattice, True)
-    # annotate("D:\\Download\\ghostpotato-master-X\\impacket\\examples\\secretsdump.py", lattice, False)
+    annotate("D:\\study\\python\\test", lattice, False)
+    # annotate("D:\\study\\python\\SAP检测项目\\hana-my-thai-star-data-generator\\src", lattice, False)
     #
     # func_node_dict, call_flow = annotate("D:\\study\\python\\SAP检测项目\\python-mini-projects-master",
     #                                      lattice, False)
     # func_node_dict = annotate("D:\\study\\python\\SAP检测项目\\hana-my-thai-star-data-generator",
     #                           lattice, False)
+
+    # annotate("D:\\Download\\kafka-python-master-X",lattice,False)  #循环依赖
+
     # print('----------------annotation-------------------')
     # for key, value in func_node_dict.items():
     #     print(key, value)

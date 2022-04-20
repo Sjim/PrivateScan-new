@@ -30,7 +30,9 @@
     "path": "Store/Local/File",
     "abbr": [
       "File",
-      "SaveFile"
+      "SaveFile",
+      "write",
+      "csv"
     ]
   },
   "Directory": {
@@ -144,7 +146,8 @@
   "Store": {
   "path": "Store",
     "abbr": [
-      "add"
+      "add",
+      "execute"
     ]
   }
 }

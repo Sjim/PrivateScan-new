@@ -73,7 +73,7 @@ def get_func_list(node, func_list=None):
 
 
 def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, file_name, node_list=None,
-                  func_name=None,
+                  func_name="__main__",
                   class_name=None):
     """
 
@@ -134,16 +134,9 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
             for func_c in func_call:
                 if func == func_c.split('.')[-1]:
                     if func_c in func_node_dict.keys():
-                        for pair in func_node_dict[func_c]:
-                            if pair[0] != "None":
-                                private_info.append(pair)
+                        for pair in func_node_dict[func_c]:  # 被调用的方法有什么隐私数据和操作 调用的该行就有什么数据和操作
+                            private_info.append(pair)
                         add_sentence_purpose(node_list_1st, file_name, node.lineno, func_node_dict[func_c])
-                    # 增加call_flow 一行调用某个方法 （废除
-                    # if func_c in p.get_methods():
-                    #     if file_name + "#" + str(node.lineno) in call_flow.keys():
-                    #         call_flow[file_name + "#" + str(node.lineno)].append(func_c)
-                    #     else:
-                    #         call_flow[file_name + "#" + str(node.lineno)] = [func_c]
         script = get_script(node, lines)
 
         if len(private_info) > 0:
@@ -170,19 +163,17 @@ def parse_tree2nd(source_dir, p, node, lines, func_node_dict, node_list_1st, fil
                                       file_name, node_list, func_name=node.name,
                                       class_name=class_name)
     else:
-        try:
+        if hasattr(node, "body"):
             for node_son in node.body:
                 node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
                                           file_name, node_list, func_name=func_name,
                                           class_name=class_name)
-            #
-            if isinstance(node, ast.If):
-                for node_son in node.orelse:
-                    node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
-                                              file_name, node_list, func_name=func_name,
-                                              class_name=class_name)
-        except AttributeError:
-            pass
+        #
+        if isinstance(node, ast.If):
+            for node_son in node.orelse:
+                node_list = parse_tree2nd(source_dir, p, node_son, lines, func_node_dict, node_list_1st,
+                                          file_name, node_list, func_name=func_name,
+                                          class_name=class_name)
 
     return node_list
 
@@ -207,7 +198,7 @@ def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
             lines = file_single.readlines()
             tree_root = ast.parse(''.join(lines))
             node_list_single = parse_tree2nd(source, p, tree_root, lines, func_node_dict,
-                                             node_list1st, file_name, {})
+                                             node_list1st, file_name, [])
             node_list.extend(node_list_single)
 
     return node_list

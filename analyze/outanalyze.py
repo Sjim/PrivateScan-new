@@ -25,6 +25,8 @@ def out_analyze(node_list, source, save_file: str, entire=False):
                 data_type = "None"
             if not purpose:
                 purpose = "None"
+            if not node.func_name:
+                node.func_name = "None"
             sheet.write(tmp_row, 0, location)
             if not entire:
                 sheet.write(tmp_row, 1, node.func_name)
