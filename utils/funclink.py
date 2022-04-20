@@ -9,13 +9,15 @@ import numpy as np
 import graphviz
 import pyan
 
+from utils.fileio import verify_file_list
+
 
 class ProjectAnalyzer:
-    def __init__(self, project):
+    def __init__(self, project, file_list):
         tmpfile = "./tmp.gv"
-        file_list = walk_files_path(project)
         self._clazzs = find_all_class(file_list, project=project)
-        graghviz(tmpfile, file_list, project)
+        file_list = verify_file_list(file_list)
+        graghviz(tmpfile, file_list)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -230,7 +232,7 @@ def test_algorithm():
     print(matrix)
 
 
-def graghviz(output, args: list, root):
+def graghviz(output, args: list):
     try:
         res = pyan.create_callgraph(args, format="dot")
         with open(output, 'w') as f:
@@ -250,12 +252,12 @@ def walk_files_path(path, endpoint='.py'):
     return file_list
 
 
-def get_link(func_node_dict, source_dir):
+def get_link(func_node_dict, source_dir, file_list):
     func_node_dict_all = {}
     for key in func_node_dict.keys():
         func_node_dict_all[key] = func_node_dict[key]
 
-    pa = ProjectAnalyzer(source_dir)
+    pa = ProjectAnalyzer(source_dir, file_list)
     for method in func_node_dict.keys():
         if method in pa.get_methods():
             for method_link in (pa.find_all_call_func(method)):
@@ -281,9 +283,9 @@ def get_link(func_node_dict, source_dir):
     return func_node_dict_all
 
 
-def get_call_flow(source_dir):
+def get_call_flow(source_dir, file_list):
     func_flow = {}
-    pa = ProjectAnalyzer(source_dir)
+    pa = ProjectAnalyzer(source_dir, file_list)
     for method in pa.get_methods():
         func_call = pa.find_direct_callee_func(method)
         if func_call:
@@ -309,7 +311,9 @@ if __name__ == '__main__':
     # for key, value in p.find_direct_callee_func().items():
     #     print(key, value)
     # print(p.find_direct_callee_func())
-    try:
-        test()
-    except KeyError as e:
-        print(str(e))
+    # try:
+    #     test()
+    # except KeyError as e:
+    #     print(str(e))
+    file_list = walk_files_path("/Users/liufan/program/PYTHON/SAP/TestProject")
+    graghviz("111.gv", "/Users/liufan/program/PYTHON/SAP/TestProject/test.py")

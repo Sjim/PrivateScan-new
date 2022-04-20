@@ -10,8 +10,8 @@ digraph G {
         subgraph cluster_main {
 
             graph [style="filled,rounded", fillcolor="#80808018", label="main"];
-            main__upload_a_file_to_share [label="upload_a_file_to_share", style="filled", fillcolor="#ccfee0b2", fontcolor="#000000", group="2"];
+            main___user_to_db [label="_user_to_db", style="filled", fillcolor="#ccfee0b2", fontcolor="#000000", group="2"];
         }
     }
-        main -> main__upload_a_file_to_share [style="dashed",  color="#838b8b"];
+        main -> main___user_to_db [style="dashed",  color="#838b8b"];
     }

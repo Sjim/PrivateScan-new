@@ -1,4 +1,6 @@
-try:
-    IP = 1
-except:
-    ip = 2
+def main(a, p=lambda s: print(s)):
+    p(a)
+
+
+if __name__ == '__main__':
+    main("you")
