@@ -181,7 +181,7 @@ def get_all_words(node, line_no, vars_and_methods):
             vars_and_methods['methods'].append(name.name)
             if name.asname:
                 vars_and_methods['methods'].append(name.asname)
-    elif isinstance(node,ast.ImportFrom):
+    elif isinstance(node, ast.ImportFrom):
         for name in node.names:
             vars_and_methods['methods'].append(name.name)
             if name.asname:
@@ -248,7 +248,7 @@ class FuncNode:
         # print(line_no, " ", script)
 
         private_word_list = match_data_type(script['vars'], data_type)
-
+        print(private_word_list)
         # 行所调用的方法
 
         for var in script['vars']:
@@ -269,7 +269,8 @@ class FuncNode:
             # 考虑数据流，找到赋值语句，将被隐私数据污染的数据保存到private_word_list
             # TODO
             if isinstance(node, ast.Assign):
-                if private_word_list[0] != ("None", "none"):
+                #  不能因为找到了 隐私变量就不考虑已定义变量的传递
+                if not ("None", "none") in private_word_list:  # 存在隐私变量 被赋值变量直接添加到key_var
                     for target in node.targets:
                         if isinstance(target, ast.Name):
                             self.key_variable[target.id] = (private_word_list, purpose)
@@ -277,28 +278,41 @@ class FuncNode:
                             self.key_variable[target.attr] = (private_word_list, purpose)
                         else:
                             pass
-                else:
-                    node_params = get_params(node.value)
-                    for node_param in node_params:
-                        if node_param in list(self.key_variable.keys()):  # 是否包含传递的变量
-                            private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
+
+                #  已定义变量的传播
+                node_params = get_params(node.value)
+                for node_param in node_params:
+                    if node_param in list(self.key_variable.keys()):  # 是否包含传递的变量 (已定义的的变量
+                        private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
+                        if ("None", "none") not in private_word_list_inherit:
                             sentence_node = SuspectedSentenceNode(self.file_path, line_no,
                                                                   private_word_list_inherit,
                                                                   purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
-                            for target in node.targets:
-                                if isinstance(target, ast.Name):
-                                    self.key_variable[target.id] = (private_word_list_inherit, purpose_inherit)
-                                elif isinstance(target, ast.Attribute):
-                                    self.key_variable[target.attr] = (private_word_list_inherit, purpose_inherit)
-                                elif isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name):
-                                    self.key_variable[target.value.id] = (private_word_list_inherit, purpose_inherit)
-                                else:
-                                    pass
+                        else:
+                            sentence_node = all_nodes[-1]
+                            sentence_node.purpose.extend(purpose_inherit)
+                            sentence_node.purpose = list(set(all_nodes[-1].purpose))
+                            purpose_inherit = sentence_node.purpose
+                            new_private_info = []
+                            for type in sentence_node.private_word_list:
+                                for purpose_each in sentence_node.purpose:
+                                    new_private_info.append((type[0],purpose_each))
+                            sentence_node.private_info = new_private_info
+                        for target in node.targets:
+                            if isinstance(target, ast.Name):
+                                self.key_variable[target.id] = (private_word_list_inherit, purpose_inherit)
+                            elif isinstance(target, ast.Attribute):
+                                self.key_variable[target.attr] = (private_word_list_inherit, purpose_inherit)
+                            elif isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name):
+                                self.key_variable[target.value.id] = (private_word_list_inherit, purpose_inherit)
+                            else:
+                                pass
+            # 考虑 数据关系  对象user 展示了user.username 说明变量user 被传递 隐私数据username
 
             elif isinstance(node, ast.Expr):
-                # TODO 逻辑
+
                 node_params = get_params(node.value)
                 if len(node_params) > 0:
                     for node_param in node_params:
@@ -309,7 +323,9 @@ class FuncNode:
                                                                   purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
-
+            elif isinstance(node, ast.ImportFrom):
+                for alias in node.names:
+                    self.key_variable[alias.name] = (private_word_list, purpose)
         for private_word in private_word_list:
             if not (private_word[0] == "None" and purpose[0] == "None") and private_word[0] not in [info[0] for info in
                                                                                                     self.private_info]:
