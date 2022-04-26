@@ -248,7 +248,9 @@ class FuncNode:
         # print(line_no, " ", script)
 
         private_word_list = match_data_type(script['vars'], data_type)
-        print(private_word_list)
+        # private_word_list = match_data_type(script['vars'], data_type) + match_data_type(script['methods'], purpose_dict)
+        # print(private_word_list)
+
         # 行所调用的方法
 
         for var in script['vars']:
@@ -260,8 +262,8 @@ class FuncNode:
 
         # print(script['methods'])
         purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
+        print(line_no, self.key_variable)
         if not (("None", "none") in private_word_list and purpose == ["None"]):
-            # print(self.file_path, line_no, private_word_list, purpose)
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose, self.func_name,
                                                   script=script_ori, methods_called=script['methods'])
             # print(private_word_list, purpose)
@@ -323,6 +325,8 @@ class FuncNode:
                                                                   purpose_inherit, self.func_name, script=script_ori,
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
+
+        # print(self.file_path, line_no, private_word_list, purpose)
             elif isinstance(node, ast.ImportFrom):
                 for alias in node.names:
                     self.key_variable[alias.name] = (private_word_list, purpose)

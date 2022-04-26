@@ -1,66 +1,14 @@
 {
-  "jobTitle": {
-    "path": "Sociality/Profession/JobTitle",
-    "abbr": ["job", "jobtitle"]
+  "Sociality": {
+    "Profession": ["jobTitle", "Salary", "Interview"],
+    "PublicLife": ["MaritalStatus", "Religion"]
   },
-  "Salary": {
-    "path": "Sociality/Profession/Salary",
-    "abbr": ["Salary"]
+  "Tracking": {
+    "Device": ["Cookie", "IPAddress", "MacAddress"],
+    "Contract": ["EmailAddress", "PhoneNumber"],
+    "Location": ["Country", "HouseNumber"]
   },
-  "Interview": {
-    "path": "Sociality/Profession/Interview",
-    "abbr": ["Interview"]
-  },
-  "MaritalStatus": {
-    "path": "Sociality/PublicLife/MaritalStatus",
-    "abbr": ["Marital", "Marr", "MaritalStatus"]
-  },
-  "Religion": {
-    "path": "Sociality/PublicLife/Religion",
-    "abbr": ["Religion"]
-  },
-  "Cookie": {
-    "path": "Tracking/Device/Cookie",
-    "abbr": ["Cookie"]
-  },
-  "IPAddress": {
-    "path": "Tracking/Device/IPAddress",
-    "abbr": ["ipaddr", "IPAddress","ip"]
-  },
-  "MacAddress": {
-    "path": "Tracking/Device/MacAddress",
-    "abbr": ["MacAddress", "MacAddr"]
-  },
-  "EmailAddress": {
-    "path": "Tracking/Contact/EmailAddress",
-    "abbr": ["email", "EmailAddr", "EmailAddress"]
-  },
-  "PhoneNumber": {
-    "path": "Tracking/Contact/PhoneNumber",
-    "abbr": ["phone", "PhoneNum", "PhoneNumber"]
-  },
-  "Country": {
-    "path": "Tracking/Location/Country",
-    "abbr": ["Country"]
-  },
-  "HouseNumber": {
-    "path": "Tracking/Location/HouseNumber",
-    "abbr": ["homeNum", "houseNum", "HomeNumber"]
-  },
-  "UserName": {
-    "path": "PersonalData/Identify/UserName",
-    "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","accountname","name"]
-  },
-  "BiometricData": {
-    "path": "PersonalData/Identify/BiometricData",
-    "abbr": ["biometric", "fingerprint"]
-  },
-  "PassWord": {
-    "path": "PersonalData/Identify/PassWord",
-    "abbr": ["pswd", "psw", "pwd", "password", "pass_word", "gitpass"]
-  },
-  "key": {
-    "path": "PersonalData/Identify/key",
-    "abbr": ["key"]
+  "PersonalData": {
+    "Identifying": ["UserName", "PassWord", "key", "BiometricData"]
   }
 }
