@@ -4,6 +4,7 @@ import logging
 import os
 import re
 from _ast import AST
+from utils.ERRORLIST import error_list
 import numpy as np
 
 import graphviz
@@ -106,7 +107,12 @@ def find_all_class(file_list: list, project="", endpoint=".py"):
     for f in file_list:
         with open(f, 'r', encoding='utf8') as file:
             lines = file.readlines()
-            tree = ast.parse(''.join(lines))
+            try:
+                tree = ast.parse(''.join(lines))
+            except SyntaxError as e:
+                e.filename = f
+                error_list.append(e)
+                pass
             for node in tree.body:
                 part_result = find_class(node)
                 for i in range(len(part_result)):
@@ -239,7 +245,8 @@ def graghviz(output, args: list):
             f.write(res)
     except Exception as e:
         logging.error(str(e))
-        raise e
+        error_list.append(e)
+        pass
 
 
 def walk_files_path(path, endpoint='.py'):
@@ -304,16 +311,6 @@ def test():
 
 
 if __name__ == '__main__':
-    # p = ProjectAnalyzer("/Users/liufan/program/PYTHON/SAP/cmdb-python-master")
-    # print(p.get_methods())
-    # print(p.find_all_call_func("sdk_api.saltstack.SaltAPI.post_reques"))
-    # print(p.find_direct_callee_func().keys())
-    # for key, value in p.find_direct_callee_func().items():
-    #     print(key, value)
-    # print(p.find_direct_callee_func())
-    # try:
-    #     test()
-    # except KeyError as e:
-    #     print(str(e))
-    file_list = walk_files_path("/Users/liufan/program/PYTHON/SAP/TestProject")
-    graghviz("111.gv", "/Users/liufan/program/PYTHON/SAP/TestProject/test.py")
+    # p = ProjectAnalyzer("D:\\study\\python\\PrivateScan-new")
+
+    graghviz("program.gv", "D:\\study\\python\\PrivateScan-new")

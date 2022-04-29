@@ -4,6 +4,7 @@ import logging
 from models.funcnode import get_script
 from models.sentencenode import SuspectedSentenceNode
 from utils.funclink import ProjectAnalyzer
+from utils.ERRORLIST import error_list
 
 
 def add_sentence_purpose(sentence_node_list, file_name, line_no, private_info_list_to_be_added):
@@ -196,7 +197,12 @@ def parse_files_2nd(file_list, source, func_node_dict, node_list1st):
     for file_name in file_list:
         with open(file_name, encoding='utf-8') as file_single:
             lines = file_single.readlines()
-            tree_root = ast.parse(''.join(lines))
+            try:
+                tree_root = ast.parse(''.join(lines))
+            except SyntaxError as e:
+                e.filename = file_name
+                error_list.append(e)
+                pass
             node_list_single = parse_tree2nd(source, p, tree_root, lines, func_node_dict,
                                              node_list1st, file_name, [])
             node_list.extend(node_list_single)

@@ -4,7 +4,7 @@ from models.funcnode import FuncNode, get_script, match_data_type, \
     match_purpose_type
 from models.sentencenode import SuspectedSentenceNode
 from utils import log
-
+from utils.ERRORLIST import error_list
 logging = log.getlogger()
 
 
@@ -116,7 +116,8 @@ def parse_files(file_list, source, lattices):
                 tree_root = ast.parse(file_string)
             except SyntaxError as e:
                 e.filename = file_name
-                raise e
+                error_list.append(e)
+                pass
             node_list_single, func_dict = parse_tree(source, lattices, file_name, tree_root, lines, func_dict=func_dict)
             node_list.extend(node_list_single)
     return node_list, func_dict
@@ -205,7 +206,8 @@ def add_code_outside_func(file_list, lattices, node_list):
                 tree_root = ast.parse(file_string)
             except SyntaxError as e:
                 e.filename = file_name
-                raise e
+                error_list.append(e)
+                pass
             add_code(lattices, file_name, tree_root, lines, node_list)
 
     return node_list

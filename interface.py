@@ -12,7 +12,7 @@ from utils.fileio import load_json, write_csv, write_to_excel
 from utils.funclink import get_link, get_call_flow
 from utils.source import get_file_list
 from utils import log
-
+from utils.ERRORLIST import error_list
 logging = log.getlogger()
 
 
@@ -83,7 +83,6 @@ def annotate(source, lattices, entire=False):
     Returns:
 
     """
-
     logging.warning("Start getting file list...")
     lattices = switch_dict(lattices)
     source, file_list = get_file_list(source)
@@ -110,7 +109,8 @@ def annotate(source, lattices, entire=False):
     #     logging.error(
     #         "Error happened in " + e.__traceback__.tb_frame.f_globals["__file__"] + str(e.__traceback__.tb_lineno))
     #     return {"correctness": False, "result": e}
-
+    if error_list:
+        return {"correctness": False, "result": error_list}
     # 将第二次递归对内容添加到列表
     node_list.extend(node_list2nd)
     # 去重
@@ -149,7 +149,8 @@ def annotate(source, lattices, entire=False):
         node_list_filtered = [item for item in node_list_no_repeated if
                               item.purpose is not None and
                               purpose in item.purpose]
-        out_analyze(node_list_filtered, source, "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls", entire)
+        out_analyze(node_list_filtered, source, "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls",
+                    entire)
         data_type_list = []
         for item in node_list_filtered:
             for data_type_each in item.private_word_list:
@@ -168,7 +169,8 @@ if __name__ == '__main__':
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
 
     # annotate("D:\\study\\python\\cmdb-python-master", lattice, True)
-    result = annotate("/Users/liufan/program/PYTHON/SAP/TestProject/test.py", lattice, False)
+    # result = annotate("/Users/liufan/program/PYTHON/SAP/TestProject/test.py", lattice, False)
+    result = annotate("D:\\study\\python\\test", lattice, False)
     # print(result)
     # annotate("D:\\study\\python\\SAP检测项目\\cms\\cmscontrib", lattice, False)
     #
