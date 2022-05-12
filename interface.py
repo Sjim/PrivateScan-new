@@ -1,6 +1,8 @@
 import os
 import time
 
+from flask import jsonify
+
 from accuracy.accuracytest import test_recall_accuracy, test_stamp
 from accuracy.accuracytest import test_missed
 from analyze.outanalyze import out_analyze
@@ -13,6 +15,7 @@ from utils.funclink import get_link, get_call_flow
 from utils.source import get_file_list
 from utils import log
 from utils.ERRORLIST import error_list
+
 logging = log.getlogger()
 
 
@@ -166,21 +169,12 @@ if __name__ == '__main__':
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
 
-    # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice, False)
-
-    # annotate("D:\\study\\python\\cmdb-python-master", lattice, True)
-    # result = annotate("/Users/liufan/program/PYTHON/SAP/TestProject/test.py", lattice, False)
-    result = annotate("D:\\study\\python\\test", lattice, False)
-    # print(result)
-    # annotate("D:\\study\\python\\SAP检测项目\\cms\\cmscontrib", lattice, False)
-    #
-    # func_node_dict, call_flow = annotate("D:\\study\\python\\SAP检测项目\\python-mini-projects-master",
-    #                                      lattice, False)
-    # func_node_dict = annotate("D:\\study\\python\\SAP检测项目\\hana-my-thai-star-data-generator",
-    #                           lattice, False)
-    # print('----------------annotation-------------------')
-    # for key, value in func_node_dict.items():
-    #     print(key, value)
-    # print('----------------call-flow-------------------')
-    # for key, value in call_flow.items():
-    #     print(key, value)
+    # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
+    #                False)
+    res = annotate("D:\\study\\python\\test",lattice,False)
+    print('----------------annotation-------------------')
+    for key, value in res['result']['annotation'].items():
+        print(key, value)
+    print('----------------call-flow-------------------')
+    for key, value in res['result']['call_flow'].items():
+        print(key, value)

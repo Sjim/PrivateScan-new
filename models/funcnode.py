@@ -262,7 +262,6 @@ class FuncNode:
 
         # print(script['methods'])
         purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
-        print(line_no, self.key_variable)
         if not (("None", "none") in private_word_list and purpose == ["None"]):
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose, self.func_name,
                                                   script=script_ori, methods_called=script['methods'])
@@ -300,7 +299,7 @@ class FuncNode:
                             new_private_info = []
                             for type in sentence_node.private_word_list:
                                 for purpose_each in sentence_node.purpose:
-                                    new_private_info.append((type[0],purpose_each))
+                                    new_private_info.append((type[0], purpose_each))
                             sentence_node.private_info = new_private_info
                         for target in node.targets:
                             if isinstance(target, ast.Name):
@@ -311,6 +310,46 @@ class FuncNode:
                                 self.key_variable[target.value.id] = (private_word_list_inherit, purpose_inherit)
                             else:
                                 pass
+            elif isinstance(node, ast.AugAssign):  # +=赋值
+                if not ("None", "none") in private_word_list:  # 存在隐私变量 被赋值变量直接添加到key_var
+
+                    if isinstance(node.target, ast.Name):
+                        self.key_variable[node.target.id] = (private_word_list, purpose)
+                    elif isinstance(node.target, ast.Attribute):
+                        self.key_variable[node.target.attr] = (private_word_list, purpose)
+                    else:
+                        pass
+
+                #  已定义变量的传播
+                node_params = get_params(node.value)
+                for node_param in node_params:
+                    if node_param in list(self.key_variable.keys()):  # 是否包含传递的变量 (已定义的的变量
+                        private_word_list_inherit, purpose_inherit = self.key_variable[node_param]
+                        if ("None", "none") not in private_word_list_inherit:
+                            sentence_node = SuspectedSentenceNode(self.file_path, line_no,
+                                                                  private_word_list_inherit,
+                                                                  purpose_inherit, self.func_name, script=script_ori,
+                                                                  methods_called=script['methods'])
+                            all_nodes.append(sentence_node)
+                        else:
+                            sentence_node = all_nodes[-1]
+                            sentence_node.purpose.extend(purpose_inherit)
+                            sentence_node.purpose = list(set(all_nodes[-1].purpose))
+                            purpose_inherit = sentence_node.purpose
+                            new_private_info = []
+                            for type in sentence_node.private_word_list:
+                                for purpose_each in sentence_node.purpose:
+                                    new_private_info.append((type[0], purpose_each))
+                            sentence_node.private_info = new_private_info
+
+                        if isinstance(node.target, ast.Name):
+                            self.key_variable[node.target.id] = (private_word_list_inherit, purpose_inherit)
+                        elif isinstance(node.target, ast.Attribute):
+                            self.key_variable[node.target.attr] = (private_word_list_inherit, purpose_inherit)
+                        elif isinstance(node.target, ast.Subscript) and isinstance(node.target.value, ast.Name):
+                            self.key_variable[node.target.value.id] = (private_word_list_inherit, purpose_inherit)
+                        else:
+                            pass
             # 考虑 数据关系  对象user 展示了user.username 说明变量user 被传递 隐私数据username
 
             elif isinstance(node, ast.Expr):
@@ -326,7 +365,7 @@ class FuncNode:
                                                                   methods_called=script['methods'])
                             all_nodes.append(sentence_node)
 
-        # print(self.file_path, line_no, private_word_list, purpose)
+            # print(self.file_path, line_no, private_word_list, purpose)
             elif isinstance(node, ast.ImportFrom):
                 for alias in node.names:
                     self.key_variable[alias.name] = (private_word_list, purpose)

@@ -12,6 +12,7 @@ cors = CORS(app, resources={r"/scan": {"origins": "*"}})
 @app.route("/scan", methods=['POST'])
 def scan():
     source = request.get_json()['source']
+    print(request.get_json())
     data_type = load_json('lattices/datatype_dictionary.json')
     purpose_dict = load_json('lattices/purpose_dictionary.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}

@@ -240,7 +240,7 @@ def test_algorithm():
 
 def graghviz(output, args: list):
     try:
-        res = pyan.create_callgraph(args, format="dot")
+        res = pyan.create_callgraph(args, format="svg")
         with open(output, 'w') as f:
             f.write(res)
     except Exception as e:
@@ -300,17 +300,8 @@ def get_call_flow(source_dir, file_list):
     return func_flow
 
 
-def test():
-    try:
-        file_list = walk_files_path("D:\\study\\python\\test")
-        res = pyan.create_callgraph(file_list, format="dot")
-    except Exception as e:
-        print(str(e))
-        raise e
-    return res
-
 
 if __name__ == '__main__':
     # p = ProjectAnalyzer("D:\\study\\python\\PrivateScan-new")
 
-    graghviz("program.gv", "D:\\study\\python\\PrivateScan-new")
+    graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])
