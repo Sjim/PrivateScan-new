@@ -135,7 +135,7 @@ def annotate(source, lattices, entire=False):
     return_value = {"correctness": True, "result": {}}
     if not entire:
         out_analyze(node_list_no_repeated, source,
-                    "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls", entire)
+                    "analyze/output2/" + source.replace('\\', '/').split("/")[-1] + ".xls", entire)
         call_flow = get_call_flow(source, file_list)
         anno = {}
         for key, value in func_node_dict.items():
@@ -152,7 +152,7 @@ def annotate(source, lattices, entire=False):
         node_list_filtered = [item for item in node_list_no_repeated if
                               item.purpose is not None and
                               purpose in item.purpose]
-        out_analyze(node_list_filtered, source, "analyze/output/" + source.replace('\\', '/').split("/")[-1] + ".xls",
+        out_analyze(node_list_filtered, source, "analyze/output2/" + source.replace('\\', '/').split("/")[-1] + ".xls",
                     entire)
         data_type_list = []
         for item in node_list_filtered:
@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
     #                False)
-    res = annotate("D:\\study\\python\\test",lattice,False)
+    res = annotate("/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice",lattice,False)
     print('----------------annotation-------------------')
     for key, value in res['result']['annotation'].items():
         print(key, value)

@@ -43,24 +43,44 @@
     "path": "Tracking/Location/Country",
     "abbr": ["Country"]
   },
+  "City": {
+    "path": "Tracking/Location/City",
+    "abbr": ["City", "hometown", "cities"]
+  },
   "HouseNumber": {
     "path": "Tracking/Location/HouseNumber",
-    "abbr": ["homeNum", "houseNum", "HomeNumber"]
+    "abbr": ["homeNum", "houseNum", "HomeNumber", "housenumber"]
+  },
+  "Location": {
+    "path": "Tracking/Location/Location",
+    "abbr": ["longitude", "latitude","geocode"]
   },
   "UserName": {
-    "path": "PersonalData/Identify/UserName",
+    "path": "PersonalData/Identifying/UserName",
     "abbr": ["UserName", "UsrName", "gitname", "git_name", "user_name","host_name","group_name","accountname","name"]
   },
   "BiometricData": {
-    "path": "PersonalData/Identify/BiometricData",
+    "path": "PersonalData/Identifying/BiometricData",
     "abbr": ["biometric", "fingerprint"]
   },
   "PassWord": {
-    "path": "PersonalData/Identify/PassWord",
-    "abbr": ["pswd", "psw", "pwd", "password", "pass_word", "gitpass"]
+    "path": "PersonalData/Identifying/PassWord",
+    "abbr": ["pswd", "psw", "pwd", "password", "pass_word", "gitpass", "pass"]
   },
   "key": {
-    "path": "PersonalData/Identify/key",
+    "path": "PersonalData/Identifying/key",
     "abbr": ["key"]
+  },
+  "Identity": {
+    "path": "PersonalData/Identifying/Identity",
+    "abbr": ["Identity", "credential"]
+  },
+  "Age": {
+    "path": "PersonalData/Age",
+    "abbr": ["age"]
+  },
+  "Birthday": {
+    "path": "PersonalData/Birthday",
+    "abbr": ["birthyear", "birthday", "birthmonth"]
   }
 }

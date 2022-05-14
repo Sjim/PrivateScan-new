@@ -29,7 +29,6 @@
   "File": {
     "path": "Store/Local/File",
     "abbr": [
-      "File",
       "SaveFile",
       "write",
       "csv"
@@ -144,10 +143,15 @@
     ]
   },
   "Store": {
-  "path": "Store",
+    "path": "Store",
     "abbr": [
-      "add",
       "execute"
+    ]
+  },
+  "encrypt": {
+    "path": "Usage/Anonymize/Encrypt",
+    "abbr": [
+      "Encrypt"
     ]
   }
 }
