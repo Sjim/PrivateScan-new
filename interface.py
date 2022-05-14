@@ -125,8 +125,8 @@ def annotate(source, lattices, entire=False):
         else:
             node_string.remove(node.__str__())
 
-    # for node in node_list_no_repeated:
-    #     print(node)
+    for node in node_list_no_repeated:
+        print(node)
 
     # 计算准确率
     logging.warning("Start calculate the accuracy...")
@@ -171,10 +171,10 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
     #                False)
-    res = annotate("/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice",lattice,False)
-    print('----------------annotation-------------------')
-    for key, value in res['result']['annotation'].items():
-        print(key, value)
-    print('----------------call-flow-------------------')
-    for key, value in res['result']['call_flow'].items():
-        print(key, value)
+    res = annotate("/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/mini",lattice,False)
+    # print('----------------annotation-------------------')
+    # for key, value in res['result']['annotation'].items():
+    #     print(key, value)
+    # print('----------------call-flow-------------------')
+    # for key, value in res['result']['call_flow'].items():
+    #     print(key, value)

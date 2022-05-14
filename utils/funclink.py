@@ -302,6 +302,12 @@ def get_call_flow(source_dir, file_list):
 
 
 if __name__ == '__main__':
-    # p = ProjectAnalyzer("D:\\study\\python\\PrivateScan-new")
+    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice"
+    file_list = walk_files_path(project)
 
-    graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])
+    p = ProjectAnalyzer(project, file_list)
+    for method in p.get_methods():
+        print(method, p.find_all_call_func(method))
+    print(p.get_methods())
+
+    # graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])
