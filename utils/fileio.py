@@ -71,7 +71,7 @@ def load_location(file_path):
     #     print(item, value)
     # print(location_dict)
 
-    return
+    return location_dict
 
 
 def write_to_excel(stamp, file_path):

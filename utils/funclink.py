@@ -240,11 +240,11 @@ def test_algorithm():
 
 def graghviz(output, args: list):
     try:
-        res = pyan.create_callgraph(args, format="svg")
+        res = pyan.create_callgraph(args, format="dot")
         with open(output, 'w') as f:
             f.write(res)
     except Exception as e:
-        logging.error(str(e))
+        logging.error(str(e)+"grpahviz")
         error_list.append(e)
         pass
 

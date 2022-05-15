@@ -1,0 +1,97 @@
+digraph G {
+    graph [rankdir=LR, clusterrank="local"];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded", fillcolor="#80808018", label=""];
+        InstgramProfile [label="InstgramProfile", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        app [label="app", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
+        converter [label="converter", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
+        encrypt [label="encrypt", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
+        fetch_store_tweet [label="fetch_store_tweet", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="4"];
+        geocoding [label="geocoding", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="5"];
+        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="6"];
+        profilepic [label="profilepic", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="7"];
+        python-password-generator [label="python-password-generator", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="8"];
+        random_password_gen [label="random_password_gen", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="9"];
+        store_emails [label="store_emails", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="10"];
+        subgraph cluster_InstgramProfile {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="InstgramProfile"];
+            InstgramProfile__main [label="main", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_app {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="app"];
+            app__Todo [label="Todo", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
+            app__delete [label="delete", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
+            app__index [label="index", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
+            app__update [label="update", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
+            subgraph cluster_app__Todo {
+
+                graph [style="filled,rounded", fillcolor="#80808018", label="app.Todo"];
+                app__Todo____repr__ [label="__repr__", style="filled", fillcolor="#ffcc99b2", fontcolor="#000000", group="1"];
+            }
+        }
+        subgraph cluster_encrypt {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="encrypt"];
+            encrypt__encrypt_dir [label="encrypt_dir", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="3"];
+            encrypt__encrypt_file [label="encrypt_file", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="3"];
+        }
+        subgraph cluster_main {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="main"];
+            main__banner [label="banner", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="6"];
+            main__main [label="main", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="6"];
+        }
+        subgraph cluster_profilepic {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="profilepic"];
+            profilepic__pp_download [label="pp_download", style="filled", fillcolor="#cce5feb2", fontcolor="#000000", group="7"];
+        }
+        subgraph cluster_random_password_gen {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="random_password_gen"];
+            random_password_gen__generate_pass [label="generate_pass", style="filled", fillcolor="#e5ccfeb2", fontcolor="#000000", group="9"];
+        }
+        subgraph cluster_store_emails {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="store_emails"];
+            store_emails__connect_to_mailbox [label="connect_to_mailbox", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
+            store_emails__get_text [label="get_text", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
+            store_emails__main [label="main", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
+            store_emails__write_to_csv [label="write_to_csv", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
+        }
+    }
+        encrypt -> encrypt__encrypt_dir [style="dashed",  color="#838b8b"];
+        encrypt -> encrypt__encrypt_file [style="dashed",  color="#838b8b"];
+        InstgramProfile -> InstgramProfile__main [style="dashed",  color="#838b8b"];
+        main -> main__main [style="dashed",  color="#838b8b"];
+        main -> main__banner [style="dashed",  color="#838b8b"];
+        profilepic -> profilepic__pp_download [style="dashed",  color="#838b8b"];
+        random_password_gen -> random_password_gen__generate_pass [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__main [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__write_to_csv [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__connect_to_mailbox [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__get_text [style="dashed",  color="#838b8b"];
+        app -> app__update [style="dashed",  color="#838b8b"];
+        app -> app__Todo [style="dashed",  color="#838b8b"];
+        app -> app__index [style="dashed",  color="#838b8b"];
+        app -> app__delete [style="dashed",  color="#838b8b"];
+        app__Todo -> app__Todo____repr__ [style="dashed",  color="#838b8b"];
+        encrypt -> encrypt__encrypt_file [style="solid",  color="#000000"];
+        encrypt -> encrypt__encrypt_dir [style="solid",  color="#000000"];
+        encrypt__encrypt_dir -> encrypt__encrypt_file [style="solid",  color="#000000"];
+        InstgramProfile -> InstgramProfile__main [style="solid",  color="#000000"];
+        main -> profilepic__pp_download [style="solid",  color="#000000"];
+        main -> main__main [style="solid",  color="#000000"];
+        main__main -> main__banner [style="solid",  color="#000000"];
+        random_password_gen -> random_password_gen__generate_pass [style="solid",  color="#000000"];
+        store_emails -> store_emails__main [style="solid",  color="#000000"];
+        store_emails__write_to_csv -> store_emails__get_text [style="solid",  color="#000000"];
+        store_emails__main -> store_emails__write_to_csv [style="solid",  color="#000000"];
+        store_emails__main -> store_emails__connect_to_mailbox [style="solid",  color="#000000"];
+        app__index -> app__Todo [style="solid",  color="#000000"];
+        app__delete -> app__Todo [style="solid",  color="#000000"];
+        app__update -> app__Todo [style="solid",  color="#000000"];
+    }

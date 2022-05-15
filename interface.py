@@ -86,6 +86,7 @@ def annotate(source, lattices, entire=False):
     Returns:
 
     """
+
     logging.warning("Start getting file list...")
     lattices = switch_dict(lattices)
     source, file_list = get_file_list(source)
@@ -98,20 +99,13 @@ def annotate(source, lattices, entire=False):
         node_list = add_code_outside_func(file_list, lattices, node_list)
     # 递归获取所有方法可能的隐私数据和操作
     logging.warning("Start getting suspected data and operations in the first recursion...")
+
     func_node_dict = get_link(func_dict, source, file_list)
     # 第二遍递归
     logging.warning("Start second recursion...")
     node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
                                    node_list)
-    # try:
-    #     # 获取文件列表（文件名）
-    #
-    # except Exception as e:
-    #     # 因为有各种报错 包括编译错误SyntaxError 包循环依赖导致的KeyError 以及可能出现的其他error 具体信息都在e中 就直接返回e 而不返回具体文件名和行数
-    #
-    #     logging.error(
-    #         "Error happened in " + e.__traceback__.tb_frame.f_globals["__file__"] + str(e.__traceback__.tb_lineno))
-    #     return {"correctness": False, "result": e}
+
     if error_list:
         return {"correctness": False, "result": error_list}
     # 将第二次递归对内容添加到列表
@@ -124,7 +118,7 @@ def annotate(source, lattices, entire=False):
             node_list_no_repeated.append(node)
         else:
             node_string.remove(node.__str__())
-
+    node_string = [node.__str__() for node in node_list_no_repeated]
     # for node in node_list_no_repeated:
     #     print(node)
 
@@ -164,6 +158,56 @@ def annotate(source, lattices, entire=False):
     return return_value
 
 
+def get_annotation(source, lattices, file_name):
+    error_list = []
+    logging.warning("Start getting file list...")
+    lattices = switch_dict(lattices)
+    source, file_list = get_file_list(source)
+    # print(source, file_list)
+    logging.warning("Start getting all operations for private info and methods call graph...")
+    # 解析文件，获取隐私数据操作 和 函数调用图
+    node_list, func_dict = parse_files(file_list, source, lattices)
+    # print("func_dict", func_dict)
+    node_list = add_code_outside_func(file_list, lattices, node_list)
+    # 递归获取所有方法可能的隐私数据和操作
+    logging.warning("Start getting suspected data and operations in the first recursion...")
+    func_node_dict = get_link(func_dict, source, file_list)
+    # 第二遍递归
+    logging.warning("Start second recursion...")
+    node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
+                                   node_list)
+    if error_list:
+        error_result = [error.__str__() for error in error_list if error.__str__()]
+        error_result = list(set(error_result))
+        return {"correctness": False, "result": error_result}
+    # 将第二次递归对内容添加到列表
+    node_list.extend(node_list2nd)
+    # 去重
+    node_list_no_repeated = []
+    node_string = [node.__str__() for node in node_list]
+    for node in node_list:
+        if node_string.count(node.__str__()) == 1:
+            node_list_no_repeated.append(node)
+        else:
+            node_string.remove(node.__str__())
+    node_string = [node.__str__() for node in node_list_no_repeated]
+    # 计算准确率
+    logging.warning("Start calculate the accuracy...")
+    if file_name:
+        recall_accuracy = test_recall_accuracy(node_list_no_repeated, source, file_name)
+        missed = test_missed(node_list_no_repeated, source, file_name)
+    else:
+        recall_accuracy = None
+        missed = None
+    # 隐私扫描结果输出到json文件
+    logging.warning("Output the result into file...")
+    return_value = {"correctness": True, "result": {"accuracy": recall_accuracy,
+                                                    "missed": {"suspected_node_list": node_string,
+                                                               "missed": missed}}}
+
+    return return_value
+
+
 if __name__ == '__main__':
     data_type = load_json('lattices/datatype.json')
     purpose_dict = load_json('lattices/purpose.json')
@@ -171,10 +215,14 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
     #                False)
-    res = annotate("D:\\study\\python\\test",lattice,False)
-    print('----------------annotation-------------------')
-    for key, value in res['result']['annotation'].items():
-        print(key, value)
-    print('----------------call-flow-------------------')
-    for key, value in res['result']['call_flow'].items():
-        print(key, value)
+    # res = annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
+    # res = annotate("D:\\study\\python\\test", lattice, True)
+    res = annotate("D:\\Download\\mini", lattice, True)
+    # for i in res['result']:
+    #     print(i.__str__())
+    # print('----------------annotation-------------------')
+    # for key, value in res['result']['annotation'].items():
+    #     print(key, value)
+    # print('----------------call-flow-------------------')
+    # for key, value in res['result']['call_flow'].items():
+    #     print(key, value)

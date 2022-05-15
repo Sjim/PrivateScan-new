@@ -19,10 +19,10 @@ class SuspectedSentenceNode:
         self.private_info = list(set(self.private_info))
 
     def __str__(self):
-        if self.private_info is None:
-            return self.file_path + ' ' + str(self.line_no) + '\n' + str(self.private_word_list) + ' ' + self.purpose
-        else:
-            return self.file_path + ' ' + str(self.line_no) + '\n' + str(self.private_info)
+        res = self.file_path + ' ' + str(self.line_no) + '|'
+        for pair in self.private_info:
+            res += pair[0] + " " + pair[1] + ","
+        return res[:-1]
 
     def __eq__(self, other):
         return self.file_path == other.file_path and self.line_no == other.line_no
