@@ -103,6 +103,9 @@ def annotate(source, lattices, entire=False):
     logging.warning("Start second recursion...")
     node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
                                    node_list)
+
+    for node in node_list2nd:
+        print(node)
     # try:
     #     # 获取文件列表（文件名）
     #
@@ -125,8 +128,8 @@ def annotate(source, lattices, entire=False):
         else:
             node_string.remove(node.__str__())
 
-    for node in node_list_no_repeated:
-        print(node)
+    # for node in node_list_no_repeated:
+    #     print(node)
 
     # 计算准确率
     logging.warning("Start calculate the accuracy...")
@@ -171,7 +174,7 @@ if __name__ == '__main__':
 
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
     #                False)
-    res = annotate("/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/mini",lattice,False)
+    res = annotate("/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/cms/test", lattice, False)
     # print('----------------annotation-------------------')
     # for key, value in res['result']['annotation'].items():
     #     print(key, value)

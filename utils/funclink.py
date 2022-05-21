@@ -3,6 +3,7 @@ import copy
 import logging
 import os
 import re
+import shutil
 from _ast import AST
 from utils.ERRORLIST import error_list
 import numpy as np
@@ -18,7 +19,17 @@ class ProjectAnalyzer:
         tmpfile = "./tmp.gv"
         self._clazzs = find_all_class(file_list, project=project)
         file_list = verify_file_list(file_list)
-        graghviz(tmpfile, file_list)
+        init_file = os.path.join(project, "__init__.py")
+        if os.path.isfile(init_file):
+            tmp_dir = os.path.join(project, "private_info_scanning_tempt")
+            os.mkdir(tmp_dir)
+            shutil.move(init_file, tmp_dir)
+            graghviz(tmpfile, file_list)
+            shutil.move(os.path.join(tmp_dir, "__init__.py"), init_file)
+            shutil.rmtree(tmp_dir)
+        else:
+            graghviz(tmpfile, file_list)
+        # graghviz(tmpfile, file_list)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -302,7 +313,7 @@ def get_call_flow(source_dir, file_list):
 
 
 if __name__ == '__main__':
-    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice"
+    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/mini"
     file_list = walk_files_path(project)
 
     p = ProjectAnalyzer(project, file_list)

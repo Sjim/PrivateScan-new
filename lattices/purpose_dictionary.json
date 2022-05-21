@@ -145,7 +145,8 @@
   "Store": {
     "path": "Store",
     "abbr": [
-      "execute"
+      "execute",
+      "add"
     ]
   },
   "encrypt": {

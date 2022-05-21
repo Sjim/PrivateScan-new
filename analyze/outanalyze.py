@@ -17,8 +17,8 @@ def out_analyze(node_list, source, save_file: str, entire=False):
     tmp_row = 1
     for i in range(len(node_list)):
         node = node_list[i]
-        file_path = node.file_path.replace('\\', '/').replace(source.replace('\\', '/') + '/', '')
-        location = file_path + "#" + str(node.line_no)
+        file_path = node.file_path.replace('\\', '/').replace(source.replace('\\', '/') + '/', '').split('/')[-1]
+        location = file_path + "#L" + str(node.line_no)
 
         for data_type, purpose in node.private_info:
             if not data_type:
