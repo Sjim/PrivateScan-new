@@ -3,6 +3,7 @@ import copy
 import logging
 import os
 import re
+import shutil
 from _ast import AST
 from utils.ERRORLIST import error_list
 import numpy as np
@@ -17,8 +18,19 @@ class ProjectAnalyzer:
     def __init__(self, project, file_list):
         tmpfile = "./tmp.gv"
         self._clazzs = find_all_class(file_list, project=project)
+
         file_list = verify_file_list(file_list)
-        graghviz(tmpfile, file_list)
+        # 生成callgraph之前如果 根目录有init会导致 methods 带上包名 因此暂时移动一下
+        init_file = os.path.join(project, "__init__.py")
+        if os.path.isfile(init_file):
+            tmp_dir = os.path.join(project, "private_info_scanning_tempt")
+            os.mkdir(tmp_dir)
+            shutil.move(init_file, tmp_dir)
+            graghviz(tmpfile, file_list)
+            shutil.move(os.path.join(tmp_dir, "__init__.py"), init_file)
+            shutil.rmtree(tmp_dir)
+        else:
+            graghviz(tmpfile, file_list)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -244,7 +256,7 @@ def graghviz(output, args: list):
         with open(output, 'w') as f:
             f.write(res)
     except Exception as e:
-        logging.error(str(e)+"grpahviz")
+        logging.error(str(e) + "grpahviz")
         error_list.append(e)
         pass
 
@@ -300,8 +312,13 @@ def get_call_flow(source_dir, file_list):
     return func_flow
 
 
-
 if __name__ == '__main__':
-    # p = ProjectAnalyzer("D:\\study\\python\\PrivateScan-new")
+    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice"
+    file_list = walk_files_path(project)
 
-    graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])
+    p = ProjectAnalyzer(project, file_list)
+    for method in p.get_methods():
+        print(method, p.find_all_call_func(method))
+    print(p.get_methods())
+
+    # graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])

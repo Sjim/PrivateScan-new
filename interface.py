@@ -216,8 +216,8 @@ if __name__ == '__main__':
     # res = annotate("D:\\Download\\azure-storage-blob-master\\sdk\\storage\\azure-storage-file-share\\samples", lattice,
     #                False)
     # res = annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
-    # res = annotate("D:\\study\\python\\test", lattice, True)
-    res = annotate("D:\\Download\\mini", lattice, True)
+    res = annotate("D:\\Download\\mini", lattice, False)
+    # res = annotate("D:\\Download\\mini", lattice, True)
     # for i in res['result']:
     #     print(i.__str__())
     # print('----------------annotation-------------------')

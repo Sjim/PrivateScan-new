@@ -6,9 +6,11 @@
   "Tracking": {
     "Device": ["Cookie", "IPAddress", "MacAddress"],
     "Contract": ["EmailAddress", "PhoneNumber"],
-    "Location": ["Country", "HouseNumber"]
+    "Location": ["Country", "HouseNumber", "City", "position"]
   },
   "PersonalData": {
-    "Identifying": ["UserName", "PassWord", "key", "BiometricData"]
+    "Identifying": ["UserName", "PassWord", "key", "BiometricData", "Identity"],
+    "Age": [],
+    "Birthday": []
   }
 }

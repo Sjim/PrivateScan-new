@@ -40,7 +40,8 @@ def get_file_list(source, endpoint='.py'):
             file_zip = zipfile.ZipFile(source, 'r', zipfile.ZIP_DEFLATED)
             py_files = [py_file for py_file in file_zip.namelist() if py_file.endswith(endpoint)]
             file_zip.extractall(path=os.path.dirname(source), members=py_files)
-            return source.replace('.zip', '').replace('.rar', '').replace('.7z', ''), [os.path.dirname(source) + "/" + py_file for py_file in py_files]
+            return source.replace('.zip', '').replace('.rar', '').replace('.7z', ''), [
+                os.path.dirname(source) + "/" + py_file for py_file in py_files]
 
     # TODO Add the situation that source is a url or a cache
     else:

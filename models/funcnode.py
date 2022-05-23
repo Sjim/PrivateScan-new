@@ -98,8 +98,7 @@ def get_script(node, script_list):
 
     # print("words_list:", words_list)
 
-    words_in_line = go_split(script_tmp, '.()[]{},=+-*/#&@!^\'\" ')
-    # TODO 修改words_in_line中的 注释内容
+    words_in_line = go_split(script_tmp, '.()[]{},:=+-*/#&@!^\'\" ')
     words_list['vars'] = [item for item in words_list['vars'] if
                           item not in words_list[
                               'methods'] and item in words_in_line and "\"\"\"" not in item and "#" not in item]
@@ -174,7 +173,7 @@ def get_all_words(node, line_no, vars_and_methods):
                 vars_and_methods['methods'].append(node_value.attr)
                 node_value = node_value.value
             if isinstance(node_value, ast.Name):
-                vars_and_methods['methods'].append(node_value.id)
+                vars_and_methods['vars'].append(node_value.id)
 
     elif isinstance(node, ast.Import):
         for name in node.names:

@@ -4,7 +4,7 @@
     "InternalShare": []
   },
   "Store": {
-    "Local": ["File", "Database", "Directory"],
+    "Local": ["File", "Database", "Directory", "Store"],
     "MessageSystem": ["Kafka", "NATS"],
     "CloudService": ["Azure", "S3"]
   },
@@ -12,6 +12,6 @@
     "Analyze": ["ML", "BI"],
     "Visualize": [],
     "Archive": [],
-    "Anonymize": ["Hash", "Truncate", "Pseudonym"]
+    "Anonymize": ["Hash", "Truncate", "Pseudonym", "Encrypt"]
   }
 }

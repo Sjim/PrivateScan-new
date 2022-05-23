@@ -58,22 +58,6 @@ def parse_tree(source, lattices, file_name, tree_node, code_lines, node_list=Non
             if isinstance(node_son, ast.FunctionDef):
                 node_list, func_dict = parse_tree(source, lattices, file_name, node_son, code_lines, node_list,
                                                   func_dict, class_name)
-
-    # elif not isinstance(tree_node, ast.Module):
-    #     line_no = tree_node.lineno
-    #     script_ori, script = get_script(tree_node, code_lines)
-    #
-    #     private_word_list = match_data_type(script['vars'], data_type)
-    #     private_word_list = list(set(private_word_list))
-    #
-    #     # print(script['methods'])
-    #     purpose = match_purpose_type(script['methods'], purpose_dict)
-    #     if not (("None", "none") in private_word_list and purpose == ["None"]):
-    #         sentence_node = SuspectedSentenceNode(file_name, line_no,
-    #                                               private_word_list, purpose, None,
-    #                                               script=script_ori)
-    #         # print(private_word_list, purpose)
-    #         node_list.append(sentence_node)
     try:
         for node_son in tree_node.body:
             node_list, func_dict = parse_tree(source, lattices, file_name, node_son, code_lines,
@@ -107,11 +91,12 @@ def parse_files(file_list, source, lattices):
     """
     node_list = []
     func_dict = {}
+    tree_root = None
     for file_name in file_list:
         with open(file_name, encoding='utf-8') as file_single:
             logging.error("Constructing file to ast:" + file_name)
             lines = file_single.readlines()
-            file_string = re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def main()", ''.join(lines))
+            file_string = re.sub(r"if[ ]*__name__[ ]*==[ ]*['\"]__main__['\"]", "def __main__()", ''.join(lines))
             try:
                 tree_root = ast.parse(file_string)
             except SyntaxError as e:

@@ -70,12 +70,12 @@ digraph G {
         main -> main__banner [style="dashed",  color="#838b8b"];
         profilepic -> profilepic__pp_download [style="dashed",  color="#838b8b"];
         random_password_gen -> random_password_gen__generate_pass [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__main [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__get_text [style="dashed",  color="#838b8b"];
         store_emails -> store_emails__write_to_csv [style="dashed",  color="#838b8b"];
         store_emails -> store_emails__connect_to_mailbox [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__get_text [style="dashed",  color="#838b8b"];
-        app -> app__update [style="dashed",  color="#838b8b"];
+        store_emails -> store_emails__main [style="dashed",  color="#838b8b"];
         app -> app__Todo [style="dashed",  color="#838b8b"];
+        app -> app__update [style="dashed",  color="#838b8b"];
         app -> app__index [style="dashed",  color="#838b8b"];
         app -> app__delete [style="dashed",  color="#838b8b"];
         app__Todo -> app__Todo____repr__ [style="dashed",  color="#838b8b"];
@@ -83,8 +83,8 @@ digraph G {
         encrypt -> encrypt__encrypt_dir [style="solid",  color="#000000"];
         encrypt__encrypt_dir -> encrypt__encrypt_file [style="solid",  color="#000000"];
         InstgramProfile -> InstgramProfile__main [style="solid",  color="#000000"];
-        main -> profilepic__pp_download [style="solid",  color="#000000"];
         main -> main__main [style="solid",  color="#000000"];
+        main -> profilepic__pp_download [style="solid",  color="#000000"];
         main__main -> main__banner [style="solid",  color="#000000"];
         random_password_gen -> random_password_gen__generate_pass [style="solid",  color="#000000"];
         store_emails -> store_emails__main [style="solid",  color="#000000"];
