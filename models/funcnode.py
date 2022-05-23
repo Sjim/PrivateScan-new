@@ -98,7 +98,8 @@ def get_script(node, script_list):
 
     # print("words_list:", words_list)
 
-    words_in_line = go_split(script_tmp, '.()[]{},:=+-*/#&@!^\'\" ')
+    words_in_line = go_split(script_tmp, ':.()[]{},=+-*/#&@!^\'\" ')
+    # TODO 修改words_in_line中的 注释内容
     words_list['vars'] = [item for item in words_list['vars'] if
                           item not in words_list[
                               'methods'] and item in words_in_line and "\"\"\"" not in item and "#" not in item]
@@ -173,7 +174,7 @@ def get_all_words(node, line_no, vars_and_methods):
                 vars_and_methods['methods'].append(node_value.attr)
                 node_value = node_value.value
             if isinstance(node_value, ast.Name):
-                vars_and_methods['vars'].append(node_value.id)
+                vars_and_methods['methods'].append(node_value.id)
 
     elif isinstance(node, ast.Import):
         for name in node.names:
@@ -244,11 +245,9 @@ class FuncNode:
         purpose_dict = self.lattices["purpose"]
 
         script_ori, script = get_script(node, self.script_list)
-        # print(line_no, " ", script)
 
         private_word_list = match_data_type(script['vars'], data_type)
         # private_word_list = match_data_type(script['vars'], data_type) + match_data_type(script['methods'], purpose_dict)
-        # print(private_word_list)
 
         # 行所调用的方法
 
@@ -261,6 +260,7 @@ class FuncNode:
 
         # print(script['methods'])
         purpose = match_purpose_type(script['methods'] + script['vars'], purpose_dict)
+        # print("2", private_word_list, purpose)
         if not (("None", "none") in private_word_list and purpose == ["None"]):
             sentence_node = SuspectedSentenceNode(self.file_path, line_no, private_word_list, purpose, self.func_name,
                                                   script=script_ori, methods_called=script['methods'])

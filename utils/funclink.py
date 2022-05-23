@@ -18,9 +18,7 @@ class ProjectAnalyzer:
     def __init__(self, project, file_list):
         tmpfile = "./tmp.gv"
         self._clazzs = find_all_class(file_list, project=project)
-
         file_list = verify_file_list(file_list)
-        # 生成callgraph之前如果 根目录有init会导致 methods 带上包名 因此暂时移动一下
         init_file = os.path.join(project, "__init__.py")
         if os.path.isfile(init_file):
             tmp_dir = os.path.join(project, "private_info_scanning_tempt")
@@ -31,6 +29,7 @@ class ProjectAnalyzer:
             shutil.rmtree(tmp_dir)
         else:
             graghviz(tmpfile, file_list)
+        # graghviz(tmpfile, file_list)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -256,7 +255,7 @@ def graghviz(output, args: list):
         with open(output, 'w') as f:
             f.write(res)
     except Exception as e:
-        logging.error(str(e) + "grpahviz")
+        logging.error(str(e))
         error_list.append(e)
         pass
 
@@ -312,8 +311,9 @@ def get_call_flow(source_dir, file_list):
     return func_flow
 
 
+
 if __name__ == '__main__':
-    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/roytuts-python/python-record-my-voice"
+    project = "/Users/liufan/Documents/实验室/隐私扫描项目/SAP检测项目/mini"
     file_list = walk_files_path(project)
 
     p = ProjectAnalyzer(project, file_list)

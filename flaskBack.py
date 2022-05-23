@@ -1,5 +1,5 @@
 from flask import Flask, request
-from interface import get_annotation
+from interface import annotate
 from flask_cors import CORS
 from flask import jsonify
 from utils.fileio import load_json
@@ -17,7 +17,7 @@ def scan():
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
 
-    result = get_annotation(source, lattice,file_name)
+    result = annotate(source, lattice,file_name)
     # result = {
     #     'accuracy': {
     #         'recall_accurate': 10,
