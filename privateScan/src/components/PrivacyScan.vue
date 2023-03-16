@@ -14,10 +14,10 @@
     <div class="scanningRes" style="display:none">
         <h1>Suspected_node_list</h1>
         <div class="nodeList"></div>
-        <h1>Manual Marking VS Program Marking</h1>
+        <!-- <h1>Manual Marking VS Program Marking</h1>
         <div class="missed"></div>
         <h1>Accracy</h1>
-        <div class="accuracy"></div>
+        <div class="accuracy"></div> -->
         </div>
   </div>
 </template>
@@ -58,35 +58,30 @@ export default {
     },
     displayTheScannningRes(){
       var scanningRes = document.getElementsByClassName("scanningRes")[0]
-      console.log(scanningRes)
+      console.log(this.serverResponse)
       scanningRes.style.display = 'block'
       // 增加 项目扫描结果
       var nodeListNode = scanningRes.getElementsByClassName("nodeList")[0]
-      var nodeList = this.serverResponse.stamp
+      var nodeList = this.serverResponse.result.missed.suspected_node_list
       for(var i=0;i<nodeList.length;i++){
         var line_out = document.createElement("p")
-        line_out.innerHTML = nodeList[i][0]+" "+nodeList[i][1]
-        for(var k=0;k<nodeList[i][2].length;k++){
-          var line_in =document.createElement("p")
-          line_in.innerHTML = nodeList[i][2][k]
-          nodeListNode.appendChild(line_in)
-        }
+        line_out.innerHTML = nodeList[i]
         nodeListNode.appendChild(line_out)
       }
     
       // 增加 准确率
-      var accuracyNode = document.getElementsByClassName("accuracy")[0]
-      var location_num = this.serverResponse.accuracy.location_num
-      var recall_accurate = this.serverResponse.accuracy.recall_accurate
-      var recall_location = this.serverResponse.accuracy.recall_location
-      var line_one = document.createElement("h3")
-      var line_sec = document.createElement("h3")
-      line_one.innerHTML="查全率: "+ "行数类型都命中 "+recall_accurate+ "   "+ "行数命中 "+recall_location+"   "+"人工标注个数 "+location_num+"   "+ "比率 "+recall_location / location_num
-      line_sec.innerHTML="查准率: "+ "行数类型都命中 "+recall_accurate+ "   "+ "行数命中 "+recall_location+ "    "+ "项目标注个数 "+nodeList.length+ "    "+"比率 "+
-          recall_location / nodeList.length
+      // var accuracyNode = document.getElementsByClassName("accuracy")[0]
+      // var location_num = this.serverResponse.accuracy.location_num
+      // var recall_accurate = this.serverResponse.accuracy.recall_accurate
+      // var recall_location = this.serverResponse.accuracy.recall_location
+      // var line_one = document.createElement("h3")
+      // var line_sec = document.createElement("h3")
+      // line_one.innerHTML="查全率: "+ "行数类型都命中 "+recall_accurate+ "   "+ "行数命中 "+recall_location+"   "+"人工标注个数 "+location_num+"   "+ "比率 "+recall_location / location_num
+      // line_sec.innerHTML="查准率: "+ "行数类型都命中 "+recall_accurate+ "   "+ "行数命中 "+recall_location+ "    "+ "项目标注个数 "+nodeList.length+ "    "+"比率 "+
+      //     recall_location / nodeList.length
       
-      accuracyNode.appendChild(line_one)
-      accuracyNode.appendChild(line_sec)
+      // accuracyNode.appendChild(line_one)
+      // accuracyNode.appendChild(line_sec)
     }
   }
 }

@@ -12,11 +12,11 @@ cors = CORS(app, resources={r"/scan": {"origins": "*"}})
 @app.route("/scan", methods=['POST'])
 def scan():
     source = request.get_json()['source']
-    file_name = request.get_json()['fileName']
+    # file_name = request.get_json()['fileName']
     data_type = load_json('lattices/datatype.json')
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
-    result = get_annotation(source, lattice, file_name)
+    result = get_annotation(source, lattice, "")
     # result = {
     #     'accuracy': {
     #         'recall_accurate': 10,
