@@ -175,5 +175,5 @@ def verify_file_list(file_list):
 
 
 if __name__ == '__main__':
-    file_list = walk_files_path('/Users/liufan/program/PYTHON/SAP/TestProject')
-    verify_file_list(file_list)
+    file_list = walk_files_path('D:\\study\\python\\SAP检测项目\\cms')
+    print(len(file_list))

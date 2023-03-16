@@ -3,6 +3,7 @@ import copy
 import logging
 import os
 import re
+import shutil
 from _ast import AST
 from utils.ERRORLIST import error_list
 import numpy as np
@@ -18,7 +19,17 @@ class ProjectAnalyzer:
         tmpfile = "./tmp.gv"
         self._clazzs = find_all_class(file_list, project=project)
         file_list = verify_file_list(file_list)
-        graghviz(tmpfile, file_list)
+        init_file = os.path.join(project, "__init__.py")
+        if os.path.isfile(init_file):
+            tmp_dir = os.path.join(project, "private_info_scanning_tempt")
+            os.mkdir(tmp_dir)
+            shutil.move(init_file, tmp_dir)
+            graghviz(tmpfile, file_list)
+            shutil.move(os.path.join(tmp_dir, "__init__.py"), init_file)
+            shutil.rmtree(tmp_dir)
+        else:
+            graghviz(tmpfile, file_list)
+        # graghviz(tmpfile, file_list)
         # _methods:函数名
         # _method_matrix:直接调用矩阵
         # 行:被调用者
@@ -101,7 +112,8 @@ class ProjectAnalyzer:
                 result.append((self._methods[i], list(reversed([self._methods[x] for x in callpath]))))
         return result
 
-
+    def get_call_flow(self,):
+        pass
 def find_all_class(file_list: list, project="", endpoint=".py"):
     result = []
     for f in file_list:
@@ -244,7 +256,7 @@ def graghviz(output, args: list):
         with open(output, 'w') as f:
             f.write(res)
     except Exception as e:
-        logging.error(str(e)+"grpahviz")
+        logging.error(str(e))
         error_list.append(e)
         pass
 
@@ -302,6 +314,11 @@ def get_call_flow(source_dir, file_list):
 
 
 if __name__ == '__main__':
-    # p = ProjectAnalyzer("D:\\study\\python\\PrivateScan-new")
+    p = ProjectAnalyzer("D:\\study\\python\\test",
+                        ["D:\\study\\python\\test\\die.py", "D:\\study\\python\\test\\live.py"])
+    print(p.find_all_call_func("live.test"))
+    print(p.find_direct_callee_func("live.test"))
+    print(p.find_direct_call_func("live.test"))
+    print("s")
 
-    graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])
+    # graghviz("program.gv", ["D:\\study\\python\\test\\main.py","D:\\study\\python\\test\\live.py"])

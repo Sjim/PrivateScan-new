@@ -279,7 +279,6 @@ class FuncNode:
                             self.key_variable[target.attr] = (private_word_list, purpose)
                         else:
                             pass
-
                 #  已定义变量的传播
                 node_params = get_params(node.value)
                 for node_param in node_params:

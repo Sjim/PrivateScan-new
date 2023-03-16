@@ -21,7 +21,7 @@ def get_word_vec(word):
     print(input_ids)
     # input_ids: [101, 2182, 2003, 2070, 3793, 2000, 4372, 16044, 102]
     # input_ids = torch.tensor([input_ids])
-    # 获得BERT模型最后一个隐层结果
+        # 获得BERT模型最后一个隐层结果
     with torch.no_grad():
         last_hidden_states = model(input_ids)[0]  # Models outputs are now tuples
         # print(model(input_ids))

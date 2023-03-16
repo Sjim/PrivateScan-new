@@ -59,8 +59,17 @@
     "path": "PersonalData/Identify/PassWord",
     "abbr": ["pswd", "psw", "pwd", "password", "pass_word", "gitpass"]
   },
-  "key": {
-    "path": "PersonalData/Identify/key",
+  "Key": {
+    "path": "PersonalData/Identify/Key",
     "abbr": ["key"]
+  },
+  "Age": {
+    "path":"PersonalData/Identify/Age",
+    "abbr": ["age"]
+  },
+  "Birthday": {
+    "path": "PersonalData/Identify/Birthday",
+    "abbr": ["birth","birthyear"]
   }
+
 }

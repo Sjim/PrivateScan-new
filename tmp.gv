@@ -3,95 +3,127 @@ digraph G {
     subgraph cluster_G {
 
         graph [style="filled,rounded", fillcolor="#80808018", label=""];
-        InstgramProfile [label="InstgramProfile", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
-        app [label="app", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
-        converter [label="converter", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
-        encrypt [label="encrypt", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
-        fetch_store_tweet [label="fetch_store_tweet", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="4"];
-        geocoding [label="geocoding", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="5"];
-        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="6"];
-        profilepic [label="profilepic", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="7"];
-        python-password-generator [label="python-password-generator", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="8"];
-        random_password_gen [label="random_password_gen", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="9"];
-        store_emails [label="store_emails", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="10"];
-        subgraph cluster_InstgramProfile {
+        address_generator [label="address_generator", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        holiday [label="holiday", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1"];
+        main [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2"];
+        math_utils [label="math_utils", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="3"];
+        model_generator-backup [label="model_generator-backup", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="4"];
+        users [label="users", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="5"];
+        weather [label="weather", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="6"];
+        subgraph cluster_address_generator {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="InstgramProfile"];
-            InstgramProfile__main [label="main", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="address_generator"];
+            address_generator__address_generate [label="address_generate", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+            address_generator__find_coordinates [label="find_coordinates", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+            address_generator__find_plz [label="find_plz", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
         }
-        subgraph cluster_app {
+        subgraph cluster_holiday {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="app"];
-            app__Todo [label="Todo", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
-            app__delete [label="delete", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
-            app__index [label="index", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
-            app__update [label="update", style="filled", fillcolor="#fee5ccb2", fontcolor="#000000", group="1"];
-            subgraph cluster_app__Todo {
-
-                graph [style="filled,rounded", fillcolor="#80808018", label="app.Todo"];
-                app__Todo____repr__ [label="__repr__", style="filled", fillcolor="#ffcc99b2", fontcolor="#000000", group="1"];
-            }
-        }
-        subgraph cluster_encrypt {
-
-            graph [style="filled,rounded", fillcolor="#80808018", label="encrypt"];
-            encrypt__encrypt_dir [label="encrypt_dir", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="3"];
-            encrypt__encrypt_file [label="encrypt_file", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="3"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="holiday"];
+            holiday__get_holiday_data [label="get_holiday_data", style="filled", fillcolor="#fef2ccb2", fontcolor="#000000", group="1"];
         }
         subgraph cluster_main {
 
             graph [style="filled,rounded", fillcolor="#80808018", label="main"];
-            main__banner [label="banner", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="6"];
-            main__main [label="main", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="6"];
+            main__clean_up [label="clean_up", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__create_connection [label="create_connection", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__generate_orders [label="generate_orders", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__get_dish_users [label="get_dish_users", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__get_geo_weights [label="get_geo_weights", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__insert_date_info [label="insert_date_info", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__insert_orders [label="insert_orders", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__insert_users [label="insert_users", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
+            main__main [label="main", style="filled", fillcolor="#e5feccb2", fontcolor="#000000", group="2"];
         }
-        subgraph cluster_profilepic {
+        subgraph cluster_math_utils {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="profilepic"];
-            profilepic__pp_download [label="pp_download", style="filled", fillcolor="#cce5feb2", fontcolor="#000000", group="7"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="math_utils"];
+            math_utils__characteristic_function [label="characteristic_function", style="filled", fillcolor="#ccfed8b2", fontcolor="#000000", group="3"];
+            math_utils__gauss_bell [label="gauss_bell", style="filled", fillcolor="#ccfed8b2", fontcolor="#000000", group="3"];
+            math_utils__integer_partition [label="integer_partition", style="filled", fillcolor="#ccfed8b2", fontcolor="#000000", group="3"];
+            math_utils__plateaued_gauss_bell [label="plateaued_gauss_bell", style="filled", fillcolor="#ccfed8b2", fontcolor="#000000", group="3"];
         }
-        subgraph cluster_random_password_gen {
+        subgraph cluster_model_generator-backup {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="random_password_gen"];
-            random_password_gen__generate_pass [label="generate_pass", style="filled", fillcolor="#e5ccfeb2", fontcolor="#000000", group="9"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="model_generator-backup"];
+            model_generator-backup__generate_data [label="generate_data", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="4"];
+            model_generator-backup__get_model [label="get_model", style="filled", fillcolor="#ccfefeb2", fontcolor="#000000", group="4"];
         }
-        subgraph cluster_store_emails {
+        subgraph cluster_users {
 
-            graph [style="filled,rounded", fillcolor="#80808018", label="store_emails"];
-            store_emails__connect_to_mailbox [label="connect_to_mailbox", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
-            store_emails__get_text [label="get_text", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
-            store_emails__main [label="main", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
-            store_emails__write_to_csv [label="write_to_csv", style="filled", fillcolor="#feccfeb2", fontcolor="#000000", group="10"];
+            graph [style="filled,rounded", fillcolor="#80808018", label="users"];
+            users__generate_data [label="generate_data", style="filled", fillcolor="#ccd8feb2", fontcolor="#000000", group="5"];
+            users__generate_record [label="generate_record", style="filled", fillcolor="#ccd8feb2", fontcolor="#000000", group="5"];
+        }
+        subgraph cluster_weather {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="weather"];
+            weather__get_weather_data [label="get_weather_data", style="filled", fillcolor="#e5ccfeb2", fontcolor="#000000", group="6"];
         }
     }
-        encrypt -> encrypt__encrypt_dir [style="dashed",  color="#838b8b"];
-        encrypt -> encrypt__encrypt_file [style="dashed",  color="#838b8b"];
-        InstgramProfile -> InstgramProfile__main [style="dashed",  color="#838b8b"];
+        address_generator -> address_generator__find_coordinates [style="dashed",  color="#838b8b"];
+        address_generator -> address_generator__find_plz [style="dashed",  color="#838b8b"];
+        address_generator -> address_generator__address_generate [style="dashed",  color="#838b8b"];
+        holiday -> holiday__get_holiday_data [style="dashed",  color="#838b8b"];
+        main -> main__insert_date_info [style="dashed",  color="#838b8b"];
+        main -> main__clean_up [style="dashed",  color="#838b8b"];
+        main -> main__get_dish_users [style="dashed",  color="#838b8b"];
         main -> main__main [style="dashed",  color="#838b8b"];
-        main -> main__banner [style="dashed",  color="#838b8b"];
-        profilepic -> profilepic__pp_download [style="dashed",  color="#838b8b"];
-        random_password_gen -> random_password_gen__generate_pass [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__main [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__write_to_csv [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__connect_to_mailbox [style="dashed",  color="#838b8b"];
-        store_emails -> store_emails__get_text [style="dashed",  color="#838b8b"];
-        app -> app__update [style="dashed",  color="#838b8b"];
-        app -> app__Todo [style="dashed",  color="#838b8b"];
-        app -> app__index [style="dashed",  color="#838b8b"];
-        app -> app__delete [style="dashed",  color="#838b8b"];
-        app__Todo -> app__Todo____repr__ [style="dashed",  color="#838b8b"];
-        encrypt -> encrypt__encrypt_file [style="solid",  color="#000000"];
-        encrypt -> encrypt__encrypt_dir [style="solid",  color="#000000"];
-        encrypt__encrypt_dir -> encrypt__encrypt_file [style="solid",  color="#000000"];
-        InstgramProfile -> InstgramProfile__main [style="solid",  color="#000000"];
-        main -> profilepic__pp_download [style="solid",  color="#000000"];
+        main -> main__generate_orders [style="dashed",  color="#838b8b"];
+        main -> main__get_geo_weights [style="dashed",  color="#838b8b"];
+        main -> main__insert_users [style="dashed",  color="#838b8b"];
+        main -> main__insert_orders [style="dashed",  color="#838b8b"];
+        main -> main__create_connection [style="dashed",  color="#838b8b"];
+        math_utils -> math_utils__integer_partition [style="dashed",  color="#838b8b"];
+        math_utils -> math_utils__characteristic_function [style="dashed",  color="#838b8b"];
+        math_utils -> math_utils__gauss_bell [style="dashed",  color="#838b8b"];
+        math_utils -> math_utils__plateaued_gauss_bell [style="dashed",  color="#838b8b"];
+        model_generator-backup -> model_generator-backup__generate_data [style="dashed",  color="#838b8b"];
+        model_generator-backup -> model_generator-backup__get_model [style="dashed",  color="#838b8b"];
+        users -> users__generate_record [style="dashed",  color="#838b8b"];
+        users -> users__generate_data [style="dashed",  color="#838b8b"];
+        weather -> weather__get_weather_data [style="dashed",  color="#838b8b"];
+        address_generator -> address_generator__address_generate [style="solid",  color="#000000"];
+        address_generator__address_generate -> address_generator__find_coordinates [style="solid",  color="#000000"];
+        address_generator__address_generate -> address_generator__find_plz [style="solid",  color="#000000"];
         main -> main__main [style="solid",  color="#000000"];
-        main__main -> main__banner [style="solid",  color="#000000"];
-        random_password_gen -> random_password_gen__generate_pass [style="solid",  color="#000000"];
-        store_emails -> store_emails__main [style="solid",  color="#000000"];
-        store_emails__write_to_csv -> store_emails__get_text [style="solid",  color="#000000"];
-        store_emails__main -> store_emails__write_to_csv [style="solid",  color="#000000"];
-        store_emails__main -> store_emails__connect_to_mailbox [style="solid",  color="#000000"];
-        app__index -> app__Todo [style="solid",  color="#000000"];
-        app__delete -> app__Todo [style="solid",  color="#000000"];
-        app__update -> app__Todo [style="solid",  color="#000000"];
+        main -> holiday [style="solid",  color="#000000"];
+        main -> weather [style="solid",  color="#000000"];
+        main -> users [style="solid",  color="#000000"];
+        main -> holiday__get_holiday_data [style="solid",  color="#000000"];
+        main -> users__generate_data [style="solid",  color="#000000"];
+        main -> weather__get_weather_data [style="solid",  color="#000000"];
+        main -> main__generate_orders [style="solid",  color="#000000"];
+        main -> math_utils [style="solid",  color="#000000"];
+        main__generate_orders -> holiday__get_holiday_data [style="solid",  color="#000000"];
+        main__clean_up -> main__create_connection [style="solid",  color="#000000"];
+        main__insert_users -> users__generate_data [style="solid",  color="#000000"];
+        main__insert_users -> main__create_connection [style="solid",  color="#000000"];
+        main__insert_date_info -> holiday__get_holiday_data [style="solid",  color="#000000"];
+        main__insert_date_info -> main__create_connection [style="solid",  color="#000000"];
+        main__get_dish_users -> math_utils__integer_partition [style="solid",  color="#000000"];
+        main__get_dish_users -> users__generate_data [style="solid",  color="#000000"];
+        main__get_dish_users -> main__generate_orders [style="solid",  color="#000000"];
+        main__get_dish_users -> main__get_geo_weights [style="solid",  color="#000000"];
+        main__insert_orders -> main__get_dish_users [style="solid",  color="#000000"];
+        main__insert_orders -> main__create_connection [style="solid",  color="#000000"];
+        main__insert_orders -> main__generate_orders [style="solid",  color="#000000"];
+        main__main -> main__insert_date_info [style="solid",  color="#000000"];
+        main__main -> main__clean_up [style="solid",  color="#000000"];
+        main__main -> main__insert_users [style="solid",  color="#000000"];
+        main__main -> main__insert_orders [style="solid",  color="#000000"];
+        math_utils__plateaued_gauss_bell -> math_utils__gauss_bell [style="solid",  color="#000000"];
+        math_utils__integer_partition -> math_utils__integer_partition [style="solid",  color="#000000"];
+        model_generator-backup -> holiday [style="solid",  color="#000000"];
+        model_generator-backup -> weather [style="solid",  color="#000000"];
+        model_generator-backup -> holiday__get_holiday_data [style="solid",  color="#000000"];
+        model_generator-backup -> weather__get_weather_data [style="solid",  color="#000000"];
+        model_generator-backup -> model_generator-backup__generate_data [style="solid",  color="#000000"];
+        model_generator-backup -> math_utils [style="solid",  color="#000000"];
+        model_generator-backup__get_model -> math_utils__gauss_bell [style="solid",  color="#000000"];
+        model_generator-backup__get_model -> math_utils__plateaued_gauss_bell [style="solid",  color="#000000"];
+        model_generator-backup__get_model -> math_utils__characteristic_function [style="solid",  color="#000000"];
+        model_generator-backup__generate_data -> model_generator-backup__get_model [style="solid",  color="#000000"];
+        users -> users__generate_data [style="solid",  color="#000000"];
+        users__generate_data -> users__generate_record [style="solid",  color="#000000"];
     }

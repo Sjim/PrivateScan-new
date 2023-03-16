@@ -1,15 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import PrivacyScan from '@/components/PrivacyScan'
 
-Vue.use(Router)
+import PrivacyScan from "@/components/PrivacyScan";
+import { createRouter, createWebHistory } from "vue-router";
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: PrivacyScan
-    }
-  ]
-})
+const routerHistory = createWebHistory();
+
+const routes = [
+  //这里和vue2一样
+  {
+    path: "/",
+    name: "HelloWorld",
+    component: PrivacyScan,
+  },
+];
+
+const router = createRouter({
+  history: routerHistory,
+  routes,
+});
+
+export default router;

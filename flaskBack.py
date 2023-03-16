@@ -16,8 +16,7 @@ def scan():
     data_type = load_json('lattices/datatype.json')
     purpose_dict = load_json('lattices/purpose.json')
     lattice = {'dataType': data_type, 'purpose': purpose_dict}
-
-    result = get_annotation(source, lattice,file_name)
+    result = get_annotation(source, lattice, file_name)
     # result = {
     #     'accuracy': {
     #         'recall_accurate': 10,

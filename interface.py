@@ -82,7 +82,6 @@ def annotate(source, lattices, entire=False):
         source: file_name which can be directory, file, zip
         lattices: _
         entire: 是否打印完整结果
-
     Returns:
 
     """
@@ -174,8 +173,7 @@ def get_annotation(source, lattices, file_name):
     func_node_dict = get_link(func_dict, source, file_list)
     # 第二遍递归
     logging.warning("Start second recursion...")
-    node_list2nd = parse_files_2nd(file_list, source, func_node_dict,
-                                   node_list)
+    node_list2nd = parse_files_2nd(file_list, source, func_node_dict, node_list)
     if error_list:
         error_result = [error.__str__() for error in error_list if error.__str__()]
         error_result = list(set(error_result))
@@ -217,7 +215,7 @@ if __name__ == '__main__':
     #                False)
     # res = annotate("D:\\study\\python\\cmdb-python-master", lattice, False)
     # res = annotate("D:\\study\\python\\test", lattice, True)
-    res = annotate("D:\\Download\\mini", lattice, True)
+    res = annotate("D:\\Download\\SAP检测项目\\hana-my-thai-star-data-generator\\src", lattice, True)
     # for i in res['result']:
     #     print(i.__str__())
     # print('----------------annotation-------------------')

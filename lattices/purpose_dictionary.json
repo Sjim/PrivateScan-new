@@ -32,7 +32,8 @@
       "File",
       "SaveFile",
       "write",
-      "csv"
+      "csv",
+      "writerow"
     ]
   },
   "Directory": {
